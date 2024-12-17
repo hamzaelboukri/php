@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Dashboard</title>
+</head>
+<body>
+  <header>
+    <h1>FC 2025 Squad Builder</h1>
+    <button id="button1" onclick="showPage('login')">Login</button>
+  </header>
+  <div class="admin-page">
+    <div class="sidebar">
+      <h2>Dashboard</h2>
+      <ul>
+        <li><a><img src="./img/home.png" alt="club" width="30px" height="30px">Home</a></li>
+        <li><a><img src="./img/icone.png" alt="club" width="30px" height="30px">Statistics</a></li>
+        <li><a><img src="./img/clup.png" alt="club" width="30px" height="30px">Add Club</a></li>
+        <li><a>Settings</a></li>
+      </ul>
+    </div>
+    
+
+    <div class="info">
+    <table class="inf">
+
+
+
+
+
+    <tr>
+                                <th>Nom</th>
+                                <th>Position</th>
+                                <th>Rating</th>
+                                <th>Pace</th>
+                                <th>Shooting</th>
+                                <th>Passing</th>
+                                <th>Dribbling</th>
+                                <th>Defending</th>
+                                <th>Physical</th>
+                                <th>Photo</th>
+                                <th>Flag</th>
+                                <th>Club</th>
+                                <th>Action</th>
+                                <button class="button2" onclick="toggleAddPlayerForm()">Add Player</button>
+                            </tr>
+                      
+                            </div> 
+
+                            
+                         
+    
+    <?php
+
+
+
+$servername = "localhost";
+$username = "root"; 
+$password = ""; 
+$dbname = "players";  
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+
+$sql="SELECT* FROM player";
+$result = $conn->query($sql);
+if (!$result) {
+  die("connction failde :".$conn->connect_error);
+  
+}
+while($row=$result->fetch_assoc()){
+
+
+
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      echo "<tr>
+                 <td>{$row['name']}</td>
+                      <td>{$row['position']}</td>
+                      <td>{$row['rating']}</td>
+                      <td>{$row['pace']}</td>
+                      <td>{$row['shooting']}</td>
+                      <td>{$row['passing']}</td>
+                      <td>{$row['dribbling']}</td>
+                      <td>{$row['defending']}</td>
+                      <td>{$row['physical']}</td>
+                      <td><img src='{$row['photo_url']}' alt='Photo' width='50px'></td>
+                      <td><img src='{$row['flag_url']}' alt='Flag' width='30px'></td>
+                      
+                      <td>{$row['club']}</td>
+                      <td>
+                          <button>Modifier</button>
+                          <button >Supprimer</button>
+                      </td>
+                  </tr>";
+    }
+  }
+}
+
+  ?>
+    </table>
+
+
+    <div class="add-player">
+<?php
+
+$servername = "localhost";
+$username = "root"; 
+$password = ""; 
+$dbname = "players";  
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+
+
+
+  Partager
+
+
+Vous avez dit :
+ {
+  "players": [
+    {
+      "name": "Lionel Messi",
+      "photo": "https://cdn.sofifa.net/players/158/023/25_120.png",
+      "position": "RW",
+      "nationality": "Argentina",
+      "flag": "https://cdn.sofifa.net/flags/ar.png",
+      "club": "Inter Miami",
+      "logo": "https://cdn.sofifa.net/meta/team/239235/120.png",
+      "rating": 93,
+      "pace": 85,
+      "shooting": 92,
+      "passing": 91,
+      "dribbling": 95,
+      "defending": 35,
+      "physical": 65
+    },
+    {
+      "name": "Cristiano Ronaldo",
+      "photo": "https://cdn.sofifa.net/players/020/801/25_120.png",
+      "position": "ST",
+      "nationality": "Portugal",
+      "flag": "https://cdn.sofifa.net/flags/pt.png",
+      "club": "Al Nassr",
+      "logo": "https://cdn.sofifa.net/meta/team/2506/120.png",
+      "rating": 91,
+      "pace": 84,
+      "shooting": 94,
+      "passing": 82,
+      "dribbling": 87,
+      "defending": 34,
+      "physical": 77
+    },
+    {
+      "name": "Kevin De Bruyne",
+      "photo": "https://cdn.sofifa.net/players/192/985/25_120.png",
+      "position": "CM",
+      "nationality": "Belgium",
+      "flag": "https://cdn.sofifa.net/flags/be.png",
+      "club": "Manchester City",
+      "logo": "https://cdn.sofifa.net/players/239/085/25_120.png",
+      "rating": 91,
+      "pace": 74,
+      "shooting": 86,
+      "passing": 93,
+      "dribbling": 88,
+      "defending": 64,
+      "physical": 78
+    },
+    {
+      "name": "Kylian Mbappé",
+      "photo": "https://cdn.sofifa.net/players/231/747/25_120.png",
+      "position": "ST",
+      "nationality": "France",
+      "flag": "https://cdn.sofifa.net/flags/fr.png",
+      "club": "Real Madrid",
+      "logo": "https://cdn.sofifa.net/meta/team/3468/120.png",
+      "rating": 92,
+      "pace": 97,
+      "shooting": 89,
+      "passing": 80,
+      "dribbling": 92,
+      "defending": 39,
+      "physical": 77
+    },
+    {
+      "name": "Virgil van Dijk",
+      "photo": "https://cdn.sofifa.net/players/203/376/25_120.png",
+      "position": "CB",
+      "nationality": "Netherlands",
+      "flag": "https://cdn.sofifa.net/flags/nl.png",
+      "club": "Liverpool",
+      "logo": "https://cdn.sofifa.net/meta/team/8/120.png",
+      "rating": 90,
+      "pace": 75,
+      "shooting": 60,
+      "passing": 70,
+      "dribbling": 72,
+      "defending": 92,
+      "physical": 86
+    },
+    {
+      "name": "Antonio Rudiger",
+      "photo": "https://cdn.sofifa.net/players/205/452/25_120.png",
+      "position": "CB",
+      "nationality": "Germany",
+      "flag": "https://cdn.sofifa.net/flags/de.png",
+      "club": "Real Madrid",
+      "logo": "https://cdn.sofifa.net/meta/team/3468/120.png",
+      "rating": 88,
+      "pace": 82,
+      "shooting": 55,
+      "passing": 73,
+      "dribbling": 70,
+      "defending": 86,
+      "physical": 86
+    },
+    {
+      "name": "Neymar Jr",
+      "photo": "https://cdn.sofifa.net/players/190/871/25_120.png",
+      "position": "LW",
+      "nationality": "Brazil",
+      "flag": "https://cdn.sofifa.net/flags/br.png",
+      "club": "Al-Hilal",
+      "logo": "https://cdn.sofifa.net/meta/team/7011/120.png",
+      "rating": 90,
+      "pace": 91,
+      "shooting": 83,
+      "passing": 86,
+      "dribbling": 94,
+      "defending": 37,
+      "physical": 61
+    },
+    {
+      "name": "Mohamed Salah",
+      "photo": "https://cdn.sofifa.net/players/192/985/25_120.png",
+      "position": "RW",
+      "nationality": "Egypt",
+      "flag": "https://cdn.sofifa.net/flags/eg.png",
+      "club": "Liverpool",
+      "logo": "https://cdn.sofifa.net/meta/team/8/120.png",
+      "rating": 89,
+      "pace": 93,
+      "shooting": 87,
+      "passing": 81,
+      "dribbling": 90,
+      "defending": 45,
+      "physical": 75
+    },
+    {
+      "name": "Joshua Kimmich",
+      "photo": "https://cdn.sofifa.net/players/212/622/25_120.png",
+      "position": "CM",
+      "nationality": "Germany",
+      "flag": "https://cdn.sofifa.net/flags/de.png",
+      "club": "Bayern Munich",
+      "logo": "https://cdn.sofifa.net/meta/team/503/120.png",
+      "rating": 89,
+      "pace": 70,
+      "shooting": 75,
+      "passing": 88,
+      "dribbling": 84,
+      "defending": 84,
+      "physical": 81
+    },
+    {
+      "name": "Jan Oblak",
+      "photo": "https://cdn.sofifa.net/players/200/389/25_120.png",
+      "position": "GK",
+      "nationality": "Slovenia",
+      "flag": "https://cdn.sofifa.net/flags/si.png",
+      "club": "Atletico Madrid",
+      "logo": "https://cdn.sofifa.net/meta/team/7980/120.png",
+      "rating": 91,
+      "diving": 89,
+      "handling": 90,
+      "kicking": 78,
+      "reflexes": 92,
+      "speed": 50,
+      "positioning": 88
+    },
+    {
+      "name": "Luka Modrić",
+      "photo": "https://cdn.sofifa.net/players/177/003/25_120.png",
+      "position": "CM",
+      "nationality": "Croatia",
+      "flag": "https://cdn.sofifa.net/flags/hr.png",
+      "club": "Real Madrid",
+      "logo": "https://cdn.sofifa.net/meta/team/3468/120.png",
+      "rating": 88,
+      "pace": 74,
+      "shooting": 78,
+      "passing": 89,
+      "dribbling": 90,
+      "defending": 72,
+      "physical": 65
+    },
+    {
+      "name": "Vinicius Junior",
+      "photo": "https://cdn.sofifa.net/players/238/794/25_120.png",
+      "position": "LW",
+      "nationality": "Brazil",
+      "flag": "https://cdn.sofifa.net/flags/br.png",
+      "club": "Real Madrid",
+      "logo": "https://cdn.sofifa.net/meta/team/3468/120.png",
+      "rating": 89,
+      "pace": 91,
+      "shooting": 88,
+      "passing": 85,
+      "dribbling": 94,
+      "defending": 39,
+      "physical": 61
+    },
+    {
+      "name": "Brahim Diáz",
+      "photo": "https://cdn.sofifa.net/players/231/410/25_120.png",
+      "position": "LW",
+      "nationality": "Morocco",
+      "flag": "https://cdn.sofifa.net/flags/ma.png",
+      "club": "Real Madrid",
+      "logo": "https://cdn.sofifa.net/meta/team/3468/120.png",
+      "rating": 82,
+      "pace": 85,
+      "shooting": 74,
+      "passing": 78,
+      "dribbling": 85,
+      "defending": 31,
+      "physical": 56
+    },
+    {
+      "name": "Karim Benzema",
+      "photo": "https://cdn.sofifa.net/players/165/153/25_120.png",
+      "position": "ST",
+      "nationality": "France",
+      "flag": "https://cdn.sofifa.net/flags/fr.png",
+      "club": "Al-Ittihad",
+      "logo" :"https://cdn.sofifa.net/meta/team/476/120.png",
+      "rating": 90,
+      "pace": 77,
+      "shooting": 90,
+      "passing": 83,
+      "dribbling": 88,
+      "defending": 40,
+      "physical": 78
+    },
+    {
+      "name": "Erling Haaland",
+      "photo": "https://cdn.sofifa.net/players/239/085/25_120.png",
+      "position": "ST",
+      "nationality": "Norway",
+      "flag": "https://cdn.sofifa.net/flags/no.png",
+      "club": "Manchester City",
+      "logo": "https://cdn.sofifa.net/players/239/085/25_120.png",
+      "rating": 91,
+      "pace": 89,
+      "shooting": 94,
+      "passing": 65,
+      "dribbling": 80,
+      "defending": 45,
+      "physical": 88
+    },
+    {
+      "name": "N'Golo Kanté",
+      "photo": "https://cdn.sofifa.net/players/215/914/25_120.png",
+      "position": "CDM",
+      "nationality": "France",
+      "flag": "https://cdn.sofifa.net/flags/fr.png",
+      "club": "Al-Ittihad",
+      "logo": "https://cdn.sofifa.net/meta/team/476/120.png",
+      "rating": 87,
+      "pace": 77,
+      "shooting": 66,
+      "passing": 75,
+      "dribbling": 82,
+      "defending": 88,
+      "physical": 82
+    },
+    {
+      "name": "Alphonso Davies",
+      "photo": "https://cdn.sofifa.net/players/234/396/25_120.png",
+      "position": "LB",
+      "nationality": "Canada",
+      "flag": "https://cdn.sofifa.net/flags/ca.png",
+      "club": "Bayern Munich",
+      "logo": "https://cdn.sofifa.net/meta/team/503/120.png",
+      "rating": 84,
+      "pace": 96,
+      "shooting": 68,
+      "passing": 77,
+      "dribbling": 82,
+      "defending": 76,
+      "physical": 77
+    },
+    {
+      "name": "Yassine Bounou",
+      "photo": "https://cdn.sofifa.net/players/209/981/25_120.png",
+      "position": "GK",
+      "nationality": "Morocco",
+      "flag": "https://cdn.sofifa.net/flags/ma.png",
+      "club": "Al-Hilal",
+      "logo": "https://cdn.sofifa.net/meta/team/7011/120.png",
+      "rating": 84,
+      "diving": 81,
+      "handling": 82,
+      "kicking": 77,
+      "reflexes": 86,
+      "speed": 38,
+      "positioning": 83
+    },
+    {
+      "name": "Bruno Fernandes",
+      "photo": "https://cdn.sofifa.net/players/212/198/25_120.png",
+      "position": "CM",
+      "nationality": "Portugal",
+      "flag": "https://cdn.sofifa.net/flags/pt.png",
+      "club": "Manchester United",
+      "logo": "https://cdn.sofifa.net/meta/team/14/120.png",
+      "rating": 88,
+      "pace": 75,
+      "shooting": 85,
+      "passing": 89,
+      "dribbling": 84,
+      "defending": 69,
+      "physical": 77
+    },
+    {
+      "name": "Jadon Sancho",
+      "photo": "https://cdn.sofifa.net/players/233/049/25_120.png",
+      "position": "LW",
+      "nationality": "England",
+      "flag": "https://cdn.sofifa.net/flags/gb-eng.png",
+      "club": "Manchester United",
+      "logo": "https://cdn.sofifa.net/meta/team/14/120.png",
+      "rating": 84,
+      "pace": 85,
+      "shooting": 74,
+      "passing": 78,
+      "dribbling": 88,
+      "defending": 34,
+      "physical": 63
+    },
+    {
+      "name": "Trent Alexander-Arnold",
+      "photo": "https://cdn.sofifa.net/players/231/281/25_120.png",
+      "position": "RB",
+      "nationality": "England",
+      "flag": "https://cdn.sofifa.net/flags/gb-eng.png",
+      "club": "Liverpool",
+      "rating": 87,
+      "pace": 76,
+      "shooting": 66,
+      "passing": 89,
+      "dribbling": 80,
+      "defending": 79,
+      "physical": 71
+    },
+    {
+      "name": "Achraf Hakimi",
+      "photo": "https://cdn.sofifa.net/players/235/212/25_120.png",
+      "position": "RB",
+      "nationality": "Morocco",
+      "flag": "https://cdn.sofifa.net/flags/ma.png",
+      "club": "Paris Saint-Germain",
+      "logo": "https://cdn.sofifa.net/meta/team/591/120.png",
+      "rating": 84,
+      "pace": 91,
+      "shooting": 76,
+      "passing": 80,
+      "dribbling": 80,
+      "defending": 75,
+      "physical": 78
+    },
+    {
+      "name": "Youssef En-Nesyri",
+      "photo": "https://cdn.sofifa.net/players/235/410/25_120.png",
+      "position": "ST",
+      "nationality": "Morocco",
+      "flag": "https://cdn.sofifa.net/flags/ma.png",
+      "club": "Fenerbahçe",
+      "logo": "https://cdn.sofifa.net/meta/team/88/120.png",
+      "rating": 83,
+      "pace": 82,
+      "shooting": 82,
+      "passing": 63,
+      "dribbling": 77,
+      "defending": 36,
+      "physical": 80
+    },
+    {
+      "name": "Noussair Mazraoui",
+      "photo": "https://cdn.sofifa.net/players/236/401/25_120.png",
+      "position": "LB",
+      "nationality": "Morocco",
+      "flag": "https://cdn.sofifa.net/flags/ma.png",
+      "club": "Manchester United",
+      "logo": "https://cdn.sofifa.net/meta/team/14/120.png",
+      "rating": 81,
+      "pace": 78,
+      "shooting": 66,
+      "passing": 77,
+      "dribbling": 83,
+      "defending": 77,
+      "physical": 71
+    },
+    {
+      "name": "Ismael Saibari",
+      "photo": "https://cdn.sofifa.net/players/259/480/25_120.png",
+      "position": "CM",
+      "nationality": "Morocco",
+      "flag": "https://cdn.sofifa.net/flags/ma.png",
+      "club": "PSV",
+      "logo": "https://cdn.sofifa.net/meta/team/682/120.png",
+      "rating": 83,
+      "pace": 89,
+      "shooting": 78,
+      "passing": 80,
+      "dribbling": 86,
+      "defending": 55,
+      "physical": 84
+    },
+    {
+      "name": "Gianluigi Donnarumma",
+      "photo": "https://cdn.sofifa.net/players/230/621/25_120.png",
+      "position": "GK",
+      "nationality": "Italy",
+      "flag": "https://cdn.sofifa.net/flags/it.png",
+      "club": "Paris Saint-Germain",
+      "logo": "https://cdn.sofifa.net/meta/team/591/120.png",
+      "rating": 89,
+      "diving": 88,
+      "handling": 84,
+      "kicking": 75,
+      "reflexes": 90,
+      "speed": 50,
+      "positioning": 85
+    }
+  ]
+}
+
+
+
+
+bhgit had json file ta5lih 3la chkal had table bache nad5lo fi data base 
+CREATE TABLE players (
+    id_player INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    nationality VARCHAR(255) NOT NULL,
+    photo_url TEXT NOT NULL,
+    club VARCHAR(255) NOT NULL,
+    pace INT CHECK (pace BETWEEN 1 AND 100),
+    shooting INT CHECK (shooting BETWEEN 1 AND 100),
+    passing INT CHECK (passing BETWEEN 1 AND 100),
+    dribbling INT CHECK (dribbling BETWEEN 1 AND 100),
+    defending INT CHECK (defending BETWEEN 1 AND 100),
+    physical INT CHECK (physical BETWEEN 1 AND 100),
+    flag_url TEXT NOT NULL,
+    rating INT NOT NULL
+);
+ChatGPT a dit :
+ChatGPT
+Here is the JSON data reformatted into SQL INSERT statements so that it can be added into the database using the table schema you provided:
+
+Table Creation:
+sql
+Copier le code
+CREATE TABLE players (
+    id_player INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    nationality VARCHAR(255) NOT NULL,
+    photo_url TEXT NOT NULL,
+    club VARCHAR(255) NOT NULL,
+    pace INT CHECK (pace BETWEEN 1 AND 100),
+    shooting INT CHECK (shooting BETWEEN 1 AND 100),
+    passing INT CHECK (passing BETWEEN 1 AND 100),
+    dribbling INT CHECK (dribbling BETWEEN 1 AND 100),
+    defending INT CHECK (defending BETWEEN 1 AND 100),
+    physical INT CHECK (physical BETWEEN 1 AND 100),
+    flag_url TEXT NOT NULL,
+    rating INT NOT NULL
+);
+SQL INSERT Statements:
+sql
+Copier le code
+INSERT INTO players (name, nationality, photo_url, club, pace, shooting, passing, dribbling, defending, physical, flag_url, rating)
+VALUES 
+('Lionel Messi', 'Argentina', 'https://cdn.sofifa.net/players/158/023/25_120.png', 'Inter Miami', 85, 92, 91, 95, 35, 65, 'https://cdn.sofifa.net/flags/ar.png', 93),
+('Cristiano Ronaldo', 'Portugal', 'https://cdn.sofifa.net/players/020/801/25_120.png', 'Al Nassr', 84, 94, 82, 87, 34, 77, 'https://cdn.sofifa.net/flags/pt.png', 91),
+('Kevin De Bruyne', 'Belgium', 'https://cdn.sofifa.net/players/192/985/25_120.png', 'Manchester City', 74, 86, 93, 88, 64, 78, 'https://cdn.sofifa.net/flags/be.png', 91),
+('Kylian Mbappé', 'France', 'https://cdn.sofifa.net/players/231/747/25_120.png', 'Real Madrid', 97, 89, 80, 92, 39, 77, 'https://cdn.sofifa.net/flags/fr.png', 92),
+('Virgil van Dijk', 'Netherlands', 'https://cdn.sofifa.net/players/203/376/25_120.png', 'Liverpool', 75, 60, 70, 72, 92, 86, 'https://cdn.sofifa.net/flags/nl.png', 90),
+('Antonio Rudiger', 'Germany', 'https://cdn.sofifa.net/players/205/452/25_120.png', 'Real Madrid', 82, 55, 73, 70, 86, 86, 'https://cdn.sofifa.net/flags/de.png', 88),
+('Neymar Jr', 'Brazil', 'https://cdn.sofifa.net/players/190/871/25_120.png', 'Al-Hilal', 91, 83, 86, 94, 37, 61, 'https://cdn.sofifa.net/flags/br.png', 90),
+('Mohamed Salah', 'Egypt', 'https://cdn.sofifa.net/players/192/985/25_120.png', 'Liverpool', 93, 87, 81, 90, 45, 75, 'https://cdn.sofifa.net/flags/eg.png', 89),
+('Joshua Kimmich', 'Germany', 'https://cdn.sofifa.net/players/212/622/25_120.png', 'Bayern Munich', 70, 75, 88, 84, 84, 81, 'https://cdn.sofifa.net/flags/de.png', 89),
+('Luka Modrić', 'Croatia', 'https://cdn.sofifa.net/players/177/003/25_120.png', 'Real Madrid', 74, 78, 89, 90, 72, 65, 'https://cdn.sofifa.net/flags/hr.png', 88),
+('Vinicius Junior', 'Brazil', 'https://cdn.sofifa.net/players/238/794/25_120.png', 'Real Madrid', 91, 88, 85, 94, 39, 61, 'https://cdn.sofifa.net/flags/br.png', 89),
+('Karim Benzema', 'France', 'https://cdn.sofifa.net/players/165/153/25_120.png', 'Al-Ittihad', 77, 90, 83, 88, 40, 78, 'https://cdn.sofifa.net/flags/fr.png', 90),
+('Erling Haaland', 'Norway', 'https://cdn.sofifa.net/players/239/085/25_120.png', 'Manchester City', 89, 94, 65, 80, 45, 88, 'https://cdn.sofifa.net/flags/no.png', 91),
+('N''Golo Kanté', 'France', 'https://cdn.sofifa.net/players/215/914/25_120.png', 'Al-Ittihad', 77, 66, 75, 82, 88, 82, 'https://cdn.sofifa.net/flags/fr.png', 87),
+('Alphonso Davies', 'Canada', 'https://cdn.sofifa.net/players/234/396/25_120.png', 'Bayern Munich', 96, 68, 77, 82, 76, 77, 'https://cdn.sofifa.net/flags/ca.png', 84),
+('Brahim Diáz', 'Morocco', 'https://cdn.sofifa.net/players/231/410/25_120.png', 'Real Madrid', 85, 74, 78, 85, 31, 56, 'https://cdn.sofifa.net/flags/ma.png', 82),
+('Achraf Hakimi', 'Morocco', 'https://cdn.sofifa.net/players/235/212/25_120.png', 'Paris Saint-Germain', 91, 76, 80, 80, 75, 78, 'https://cdn.sofifa.net/flags/ma.png', 84),
+('Yassine Bounou', 'Morocco', 'https://cdn.sofifa.net/players/209/981/25_120.png', 'Al-Hilal', 38, 0, 0, 0, 0, 0, 'https://cdn.sofifa.net/flags/ma.png', 84),
+('Trent Alexander-Arnold', 'England', 'https://cdn.sofifa.net/players/231/281/25_120.png', 'Liverpool', 76, 66, 89, 80, 79, 71, 'https://cdn.sofifa.net/flags/gb-eng.png', 87);
+Notes:
+Goalkeeper stats: Some players like goalkeepers do not have pace, shooting, etc., so you can adapt the table schema for GK-specific fields.
+Null Values: Replace stats that don’t apply (like GK stats for outfield players) with NULL or set specific defaults.
+Database Execution: You can execute these statements sequentially in MySQL or any compatible database system.
+
+
+
+
+
+Vous avez dit :
+bhgit li sata li kyna fi jason kamla 
+ChatGPT a dit :
+ChatGPT
+لإدخال البيانات الموجودة في ملف JSON إلى قاعدة البيانات باستخدام الجدول الذي أنشأته، سأوفر لك أوامر SQL INSERT تلقائيًا. إليك الكود الذي سيمكنك من إدخال جميع اللاعبين من الملف JSON إلى الجدول players:
+
+أوامر SQL
+sql
+Copier le code
+INSERT INTO players (name, nationality, photo_url, club, pace, shooting, passing, dribbling, defending, physical, flag_url, rating) VALUES
+('Lionel Messi', 'Argentina', 'https://cdn.sofifa.net/players/158/023/25_120.png', 'Inter Miami', 85, 92, 91, 95, 35, 65, 'https://cdn.sofifa.net/flags/ar.png', 93),
+('Cristiano Ronaldo', 'Portugal', 'https://cdn.sofifa.net/players/020/801/25_120.png', 'Al Nassr', 84, 94, 82, 87, 34, 77, 'https://cdn.sofifa.net/flags/pt.png', 91),
+('Kevin De Bruyne', 'Belgium', 'https://cdn.sofifa.net/players/192/985/25_120.png', 'Manchester City', 74, 86, 93, 88, 64, 78, 'https://cdn.sofifa.net/flags/be.png', 91),
+('Kylian Mbappé', 'France', 'https://cdn.sofifa.net/players/231/747/25_120.png', 'Real Madrid', 97, 89, 80, 92, 39, 77, 'https://cdn.sofifa.net/flags/fr.png', 92),
+('Virgil van Dijk', 'Netherlands', 'https://cdn.sofifa.net/players/203/376/25_120.png', 'Liverpool', 75, 60, 70, 72, 92, 86, 'https://cdn.sofifa.net/flags/nl.png', 90),
+('Antonio Rudiger', 'Germany', 'https://cdn.sofifa.net/players/205/452/25_120.png', 'Real Madrid', 82, 55, 73, 70, 86, 86, 'https://cdn.sofifa.net/flags/de.png', 88),
+('Neymar Jr', 'Brazil', 'https://cdn.sofifa.net/players/190/871/25_120.png', 'Al-Hilal', 91, 83, 86, 94, 37, 61, 'https://cdn.sofifa.net/flags/br.png', 90),
+('Mohamed Salah', 'Egypt', 'https://cdn.sofifa.net/players/192/985/25_120.png', 'Liverpool', 93, 87, 81, 90, 45, 75, 'https://cdn.sofifa.net/flags/eg.png', 89),
+('Joshua Kimmich', 'Germany', 'https://cdn.sofifa.net/players/212/622/25_120.png', 'Bayern Munich', 70, 75, 88, 84, 84, 81, 'https://cdn.sofifa.net/flags/de.png', 89),
+('Luka Modrić', 'Croatia', 'https://cdn.sofifa.net/players/177/003/25_120.png', 'Real Madrid', 74, 78, 89, 90, 72, 65, 'https://cdn.sofifa.net/flags/hr.png', 88),
+('Vinicius Junior', 'Brazil', 'https://cdn.sofifa.net/players/238/794/25_120.png', 'Real Madrid', 91, 88, 85, 94, 39, 61, 'https://cdn.sofifa.net/flags/br.png', 89),
+('Brahim Diáz', 'Morocco', 'https://cdn.sofifa.net/players/231/410/25_120.png', 'Real Madrid', 85, 74, 78, 85, 31, 56, 'https://cdn.sofifa.net/flags/ma.png', 82),
+('Karim Benzema', 'France', 'https://cdn.sofifa.net/players/165/153/25_120.png', 'Al-Ittihad', 77, 90, 83, 88, 40, 78, 'https://cdn.sofifa.net/flags/fr.png', 90),
+('Erling Haaland', 'Norway', 'https://cdn.sofifa.net/players/239/085/25_120.png', 'Manchester City', 89, 94, 65, 80, 45, 88, 'https://cdn.sofifa.net/flags/no.png', 91),
+('N\'Golo Kanté', 'France', 'https://cdn.sofifa.net/players/215/914/25_120.png', 'Al-Ittihad', 77, 66, 75, 82, 88, 82, 'https://cdn.sofifa.net/flags/fr.png', 87),
+('Alphonso Davies', 'Canada', 'https://cdn.sofifa.net/players/234/396/25_120.png', 'Bayern Munich', 96, 68, 77, 82, 76, 77, 'https://cdn.sofifa.net/flags/ca.png', 84),
+('Bruno Fernandes', 'Portugal', 'https://cdn.sofifa.net/players/212/198/25_120.png', 'Manchester United', 75, 85, 89, 84, 69, 77, 'https://cdn.sofifa.net/flags/pt.png', 88),
+('Jadon Sancho', 'England', 'https://cdn.sofifa.net/players/233/049/25_120.png', 'Manchester United', 85, 74, 78, 88, 34, 63, 'https://cdn.sofifa.net/flags/gb-eng.png', 84),
+('Trent Alexander-Arnold', 'England', 'https://cdn.sofifa.net/players/231/281/25_120.png', 'Liverpool', 76, 66, 89, 80, 79, 71, 'https://cdn.sofifa.net/flags/gb-eng.png', 87),
+('Achraf Hakimi', 'Morocco', 'https://cdn.sofifa.net/players/235/212/25_120.png', 'Paris Saint-Germain', 91, 76, 80, 80, 75, 78, 'https://cdn.sofifa.net/flags/ma.png', 84),
+('Youssef En-Nesyri', 'Morocco', 'https://cdn.sofifa.net/players/235/410/25_120.png', 'Fenerbahçe', 82, 82, 63, 77, 36, 80, 'https://cdn.sofifa.net/flags/ma.png', 83),
+('Ismael Saibari', 'Morocco', 'https://cdn.sofifa.net/players/259/480/25_120.png', 'PSV', 89, 78, 80, 86, 55, 84, 'https://cdn.sofifa.net/flags/ma.png', 83),
+('Gianluigi Donnarumma', 'Italy', 'https://cdn.sofifa.net/players/230/621/25_120.png', 'Paris Saint-Germain', NULL, NULL, NULL, NULL, NULL, NULL, 'https://cdn.sofifa.net/flags/it.png', 89);
+ملاحظات
+الحراس (GK) مثل جانلويجي دوناروما لا تحتوي إحصائيات مشابهة للاعبين الميدانيين، لذا يمكن استخدام NULL للأعمدة غير المتوفرة.
+إذا كنت تستخدم برنامجًا مثل MySQL Workbench أو phpMyAdmin، يمكنك نسخ الكود أعلاه وتشغيله لإضافة اللاعبين مباشرة.
+هل تحتاج إلى أي تحسين أو استفسار آخر حول الإدخال؟ 😊
+
+
+
+
+
+
+Vous avez dit :
+	id_player	name	nationality	photo_url	club	pace	shooting	passing	dribbling	defending	physical	flag_url	rating	
+ChatGPT a dit :
+ChatGPT
+لتنفيذ عملية إدخال البيانات في قاعدة بيانات بجدول يحتوي على العمود id_player، والذي من المفترض أن يكون مفتاحًا رئيسيًا يتم توليده تلقائيًا (Auto Increment)، لن تحتاج إلى تحديد هذا العمود عند الإدخال لأن قيمته ستُولد تلقائيًا.
+
+إليك كود SQL INSERT المعدل لإضافة البيانات إلى جدولك:
+
+صيغة الإدخال النهائي
+sql
+Copier le code
+INSERT INTO players (name, nationality, photo_url, club, pace, shooting, passing, dribbling, defending, physical, flag_url, rating) VALUES
+('Lionel Messi', 'Argentina', 'https://cdn.sofifa.net/players/158/023/25_120.png', 'Inter Miami', 85, 92, 91, 95, 35, 65, 'https://cdn.sofifa.net/flags/ar.png', 93),
+('Cristiano Ronaldo', 'Portugal', 'https://cdn.sofifa.net/players/020/801/25_120.png', 'Al Nassr', 84, 94, 82, 87, 34, 77, 'https://cdn.sofifa.net/flags/pt.png', 91),
+('Kevin De Bruyne', 'Belgium', 'https://cdn.sofifa.net/players/192/985/25_120.png', 'Manchester City', 74, 86, 93, 88, 64, 78, 'https://cdn.sofifa.net/flags/be.png', 91),
+('Kylian Mbappé', 'France', 'https://cdn.sofifa.net/players/231/747/25_120.png', 'Real Madrid', 97, 89, 80, 92, 39, 77, 'https://cdn.sofifa.net/flags/fr.png', 92),
+('Virgil
+
+
+
+
+
+Vous avez dit :
+Check constraint 'player_chk_2' is violated.
+ChatGPT a dit :
+ChatGPT
+الخطأ الذي يظهر لديك: "Check constraint 'player_chk_2' is violated" يشير إلى وجود "قيد تحقق" (Check Constraint) في قاعدة البيانات يمنع إدخال البيانات التي تخالف شرطًا محددًا في الجدول.
+
+الخطوات لتحديد المشكلة وحلها:
+فحص قيد التحقق (Check Constraint):
+يجب أولاً معرفة الشرط المحدد في player_chk_2.
+قد يكون الشرط متعلقًا بأحد الأعمدة مثل:
+
+قيمة rating يجب أن تكون بين 1 و 99.
+قيمة pace, shooting, passing, أو physical يجب أن تكون ضمن نطاق معين.
+مثال على شرط تحقق شائع:
+
+sql
+Copier le code
+ALTER TABLE players ADD CONSTRAINT player_chk_2 
+CHECK (rating >= 1 AND rating <= 99);
+مراجعة البيانات المُدخلة:
+تأكد من أن البيانات التي تحاول إدخالها لا تنتهك قيد التحقق المذكور.
+
+تحقق من التالي:
+
+pace, shooting, passing, dribbling, defending, physical, rating يجب أن تكون أعدادًا صحيحة ضمن النطاق [1-99].
+إذا كانت أي قيمة خارج هذا النطاق، فستفشل عملية الإدخال.
+مثال بيانات صحيحة:
+
+sql
+Copier le code
+('Lionel Messi', 'Argentina', 'https://cdn.sofifa.net/players/158/023/25_120.png', 
+'Inter Miami', 85, 92, 91, 95, 35, 65, 'https://cdn.sofifa.net/flags/ar.png', 93)
+إيجاد القيد في قاعدة البيانات:
+يمكنك فحص قيود التحقق الحالية باستخدام الاستعلام التالي (في قواعد بيانات MySQL):
+
+sql
+Copier le code
+SELECT CONSTRAINT_NAME, CHECK_CLAUSE
+FROM INFORMATION_SCHEMA.CHECK_CONSTRAINTS
+WHERE TABLE_NAME = 'players';
+سيُظهر لك الشروط المرتبطة بالجدول.
+
+الحل المحتمل:
+قم بتصحيح البيانات بحيث تتوافق مع قيود التحقق. إذا كنت متأكدًا أن البيانات صحيحة وتحتاج إلى تعديل الشرط، يمكنك إما:
+
+تعديل القيد ليقبل النطاق المناسب.
+
+sql
+Copier le code
+ALTER TABLE players DROP CONSTRAINT player_chk_2;
+ALTER TABLE players ADD CONSTRAINT player_chk_2 CHECK (rating >= 0 AND rating <= 100);
+أو مراجعة البيانات المُدخلة وتعديل القيم التي تخرج عن النطاق.
+
+إذا كنت تريدني أن أساعدك في فحص البيانات أو حل المشكلة خطوة بخطوة، أخبرني! 😊
+
+
+
+
+
+
+Vous avez dit :
+CREATE TABLE player (
+    id_player INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    nationality VARCHAR(255) NOT NULL,
+    photo_url TEXT NOT NULL,
+    club VARCHAR(255) NOT NULL,
+    pace INT CHECK (pace BETWEEN 1 AND 100),
+    shooting INT CHECK (shooting BETWEEN 1 AND 100),
+    passing INT CHECK (passing BETWEEN 1 AND 100),
+    dribbling INT CHECK (dribbling BETWEEN 1 AND 100),
+    defending INT CHECK (defending BETWEEN 1 AND 100),
+    physical INT CHECK (physical BETWEEN 1 AND 100),
+    flag_url TEXT NOT NULL,
+    rating INT NOT NULL
+);
+ChatGPT a dit :
+ChatGPT
+من خلال الكود الذي قمت بمشاركته، الجدول يحتوي على شروط التحقق (Check Constraints) التي تفرض أن تكون القيم بين 1 و 100 للأعمدة التالية:
+
+pace
+shooting
+passing
+dribbling
+defending
+physical
+تحليل المشكلة:
+الرسالة "Check constraint 'player_chk_2' is violated" تحدث عندما:
+
+القيمة المُدخلة لأحد هذه الأعمدة (مثل pace أو shooting) تكون خارج النطاق [1-100].
+أو إذا كان الإدخال يحاول إدخال قيمة NULL (وهي ممنوعة بسبب القيد).
+حل المشكلة:
+1. تحقق من البيانات التي تُحاول إدخالها
+تأكد أن كل قيمة في الأعمدة المذكورة هي عدد صحيح بين 1 و 100.
+
+مثال على بيانات صحيحة:
+
+sql
+Copier le code
+INSERT INTO player (name, nationality, photo_url, club, pace, shooting, passing, dribbling, defending, physical, flag_url, rating)
+VALUES ('Lionel Messi', 'Argentina', 'https://example.com/messi.jpg', 'Inter Miami', 85, 92, 91, 95, 35, 65, 'https://example.com/arg.png', 93);
+بيانات خاطئة ستسبب المشكلة:
+
+sql
+Copier le code
+-- pace خارج النطاق
+INSERT INTO player (name, nationality, photo_url, club, pace, shooting, passing, dribbling, defending, physical, flag_url, rating)
+VALUES ('Cristiano Ronaldo', 'Portugal', 'https://example.com/ronaldo.jpg', 'Al-Nassr', 120, 90, 85, 88, 40, 70, 'https://example.com/pt.png', 90);
+القيمة pace = 120 غير مسموح بها لأنها خارج النطاق [1-100].
+
+2. تحقق من القيم الخاطئة في البيانات الحالية (إن وجدت):
+إذا كان الجدول يحتوي على بيانات بالفعل، يمكنك التحقق من القيم غير الصحيحة باستخدام الاستعلام التالي:
+
+sql
+Copier le code
+SELECT * FROM player 
+WHERE pace NOT BETWEEN 1 AND 100
+   OR shooting NOT BETWEEN 1 AND 100
+   OR passing NOT BETWEEN 1 AND 100
+   OR dribbling NOT BETWEEN 1 AND 100
+   OR defending NOT BETWEEN 1 AND 100
+   OR physical NOT BETWEEN 1 AND 100;
+3. إصلاح القيم الخاطئة:
+إذا وجدت صفوفًا تحتوي على قيم خارج النطاق، قم بتحديثها باستخدام UPDATE:
+
+sql
+Copier le code
+UPDATE player
+SET pace = 90
+WHERE pace > 100 OR pace < 1;
+إذا كنت تريد تعديل القيد:
+إذا كنت ترغب في السماح بقيم أخرى (مثلاً من 0 إلى 100)، قم بتحديث الجدول هكذا:
+
+sql
+Copier le code
+ALTER TABLE player DROP CONSTRAINT player_chk_2; 
+ALTER TABLE player MODIFY pace INT CHECK (pace BETWEEN 0 AND 100);
+أخبرني إن كنت تحتاج مزيدًا من المساعدة! 😊
+
+
+
+
+
+
+Vous avez dit :
+INSERT INTO players (name, nationality, photo_url, club, pace, shooting, passing, dribbling, defending, physical, flag_url, rating)
+VALUES 
+('Lionel Messi', 'Argentina', 'https://cdn.sofifa.net/players/158/023/25_120.png', 'Inter Miami', 85, 92, 91, 95, 35, 65, 'https://cdn.sofifa.net/flags/ar.png', 93),
+('Cristiano Ronaldo', 'Portugal', 'https://cdn.sofifa.net/players/020/801/25_120.png', 'Al Nassr', 84, 94, 82, 87, 34, 77, 'https://cdn.sofifa.net/flags/pt.png', 91),
+('Kevin De Bruyne', 'Belgium', 'https://cdn.sofifa.net/players/192/985/25_120.png', 'Manchester City', 74, 86, 93, 88, 64, 78, 'https://cdn.sofifa.net/flags/be.png', 91),
+('Kylian Mbappé', 'France', 'https://cdn.sofifa.net/players/231/747/25_120.png', 'Real Madrid', 97, 89, 80, 92, 39, 77, 'https://cdn.sofifa.net/flags/fr.png', 92),
+('Virgil van Dijk', 'Netherlands', 'https://cdn.sofifa.net/players/203/376/25_120.png', 'Liverpool', 75, 60, 70, 72, 92, 86, 'https://cdn.sofifa.net/flags/nl.png', 90),
+('Antonio Rudiger', 'Germany', 'https://cdn.sofifa.net/players/205/452/25_120.png', 'Real Madrid', 82, 55, 73, 70, 86, 86, 'https://cdn.sofifa.net/flags/de.png', 88),
+('Neymar Jr', 'Brazil', 'https://cdn.sofifa.net/players/190/871/25_120.png', 'Al-Hilal', 91, 83, 86, 94, 37, 61, 'https://cdn.sofifa.net/flags/br.png', 90),
+('Mohamed Salah', 'Egypt', 'https://cdn.sofifa.net/players/192/985/25_120.png', 'Liverpool', 93, 87, 81, 90, 45, 75, 'https://cdn.sofifa.net/flags/eg.png', 89),
+('Joshua Kimmich', 'Germany', 'https://cdn.sofifa.net/players/212/622/25_120.png', 'Bayern Munich', 70, 75, 88, 84, 84, 81, 'https://cdn.sofifa.net/flags/de.png', 89),
+('Luka Modrić', 'Croatia', 'https://cdn.sofifa.net/players/177/003/25_120.png', 'Real Madrid', 74, 78, 89, 90, 72, 65, 'https://cdn.sofifa.net/flags/hr.png', 88),
+('Vinicius Junior', 'Brazil', 'https://cdn.sofifa.net/players/238/794/25_120.png', 'Real Madrid', 91, 88, 85, 94, 39, 61, 'https://cdn.sofifa.net/flags/br.png', 89),
+('Karim Benzema', 'France', 'https://cdn.sofifa.net/players/165/153/25_120.png', 'Al-Ittihad', 77, 90, 83, 88, 40, 78, 'https://cdn.sofifa.net/flags/fr.png', 90),
+('Erling Haaland', 'Norway', 'https://cdn.sofifa.net/players/239/085/25_120.png', 'Manchester City', 89, 94, 65, 80, 45, 88, 'https://cdn.sofifa.net/flags/no.png', 91),
+('N''Golo Kanté', 'France', 'https://cdn.sofifa.net/players/215/914/25_120.png', 'Al-Ittihad', 77, 66, 75, 82, 88, 82, 'https://cdn.sofifa.net/flags/fr.png', 87),
+('Alphonso Davies', 'Canada', 'https://cdn.sofifa.net/players/234/396/25_120.png', 'Bayern Munich', 96, 68, 77, 82, 76, 77, 'https://cdn.sofifa.net/flags/ca.png', 84),
+('Brahim Diáz', 'Morocco', 'https://cdn.sofifa.net/players/231/410/25_120.png', 'Real Madrid', 85, 74, 78, 85, 31, 56, 'https://cdn.sofifa.net/flags/ma.png', 82),
+('Achraf Hakimi', 'Morocco', 'https://cdn.sofifa.net/players/235/212/25_120.png', 'Paris Saint-Germain', 91, 76, 80, 80, 75, 78, 'https://cdn.sofifa.net/flags/ma.png', 84),
+('Yassine Bounou', 'Morocco', 'https://cdn.sofifa.net/players/209/981/25_120.png', 'Al-Hilal', 38, 0, 0, 0, 0, 0, 'https://cdn.sofifa.net/flags/ma.png', 84),
+('Trent Alexander-Arnold', 'England', 'https://cdn.sofifa.net/players/231/281/25_120.png', 'Liverpool', 76, 66, 89, 80, 79, 71, 'https://cdn.sofifa.net/flags/gb-eng.png', 87);
+ChatGPT a dit :
+ChatGPT
+يبدو أن هناك مشكلة في البيانات التي تحاول إدخالها في جدول players:
+
+قيمة shooting, passing, dribbling, defending, physical لبعض اللاعبين هي صفر (0):
+حسب تصميم الجدول الذي قمت بإنشائه سابقًا، فإن هذه القيم يجب أن تكون ضمن النطاق بين 1 و 100. لذا، القيم مثل shooting = 0, passing = 0 ستكون غير مقبولة.
+
+بيانات اللاعب Yassine Bounou:
+
+يبدو أن القيم الخاصة به هي صفر لجميع الفئات ما عدا pace.
+تحتاج إلى تحديث هذه القيم إلى قيم صالحة، لأن CHECK CONSTRAINT سيفشل.
+الحل:
+تأكد من تحديث القيم الخاطئة (مثل الصفر) إلى قيم ضمن النطاق [1, 100]. يمكنك تعديل البيانات قبل إدخالها.
+
+مثال لتعديل الإدخال:
+
+sql
+Copier le code
+INSERT INTO players (name, nationality, photo_url, club, pace, shooting, passing, dribbling, defending, physical, flag_url, rating)
+VALUES 
+('Lionel Messi', 'Argentina', 'https://cdn.sofifa.net/players/158/023/25_120.png', 'Inter Miami', 85, 92, 91, 95, 35, 65, 'https://cdn.sofifa.net/flags/ar.png', 93),
+('Cristiano Ronaldo', 'Portugal', 'https://cdn.sofifa.net/players/020/801/25_120.png', 'Al Nassr', 84, 94, 82, 87, 34, 77, 'https://cdn.sofifa.net/flags/pt.png', 91),
+('Kevin De Bruyne', 'Belgium', 'https://cdn.sofifa.net/players/192/985/25_120.png', 'Manchester City', 74, 86, 93, 88, 64, 78, 'https://cdn.sofifa.net/flags/be.png', 91),
+('Kylian Mbappé', 'France', 'https://cdn.sofifa.net/players/231/747/25_120.png', 'Real Madrid', 97, 89, 80, 92, 39, 77, 'https://cdn.sofifa.net/flags/fr.png', 92),
+('Virgil van Dijk', 'Netherlands', 'https://cdn.sofifa.net/players/203/376/25_120.png', 'Liverpool', 75, 60, 70, 72, 92, 86, 'https://cdn.sofifa.net/flags/nl.png', 90),
+('Antonio Rudiger', 'Germany', 'https://cdn.sofifa.net/players/205/452/25_120.png', 'Real Madrid', 82, 55, 73, 70, 86, 86, 'https://cdn.sofifa.net/flags/de.png', 88),
+('Neymar Jr', 'Brazil', 'https://cdn.sofifa.net/players/190/871/25_120.png', 'Al-Hilal', 91, 83, 86, 94, 37, 61, 'https://cdn.sofifa.net/flags/br.png', 90),
+('Mohamed Salah', 'Egypt', 'https://cdn.sofifa.net/players/192/985/25_120.png', 'Liverpool', 93, 87, 81, 90, 45, 75, 'https://cdn.sofifa.net/flags/eg.png', 89),
+('Joshua Kimmich', 'Germany', 'https://cdn.sofifa.net/players/212/622/25_120.png', 'Bayern Munich', 70, 75, 88, 84, 84, 81, 'https://cdn.sofifa.net/flags/de.png', 89),
+('Luka Modrić', 'Croatia', 'https://cdn.sofifa.net/players/177/003/25_120.png', 'Real Madrid', 74, 78, 89, 90, 72, 65, 'https://cdn.sofifa.net/flags/hr.png', 88),
+('Vinicius Junior', 'Brazil', 'https://cdn.sofifa.net/players/238/794/25_120.png', 'Real Madrid', 91, 88, 85, 94, 39, 61, 'https://cdn.sofifa.net/flags/br.png', 89),
+('Karim Benzema', 'France', 'https://cdn.sofifa.net/players/165/153/25_120.png', 'Al-Ittihad', 77, 90, 83, 88, 40, 78, 'https://cdn.sofifa.net/flags/fr.png', 90),
+('Erling Haaland', 'Norway', 'https://cdn.sofifa.net/players/239/085/25_120.png', 'Manchester City', 89, 94, 65, 80, 45, 88, 'https://cdn.sofifa.net/flags/no.png', 91),
+('N''Golo Kanté', 'France', 'https://cdn.sofifa.net/players/215/914/25_120.png', 'Al-Ittihad', 77, 66, 75, 82, 88, 82, 'https://cdn.sofifa.net/flags/fr.png', 87),
+('Alphonso Davies', 'Canada', 'https://cdn.sofifa.net/players/234/396/25_120.png', 'Bayern Munich', 96, 68, 77, 82, 76, 77, 'https://cdn.sofifa.net/flags/ca.png', 84),
+('Brahim Diáz', 'Morocco', 'https://cdn.sofifa.net/players/231/410/25_120.png', 'Real Madrid', 85, 74, 78, 85, 31, 56, 'https://cdn.sofifa.net/flags/ma.png', 82),
+('Achraf Hakimi', 'Morocco', 'https://cdn.sofifa.net/players/235/212/25_120.png', 'Paris Saint-Germain', 91, 76, 80, 80, 75, 78, 'https://cdn.sofifa.net/flags/ma.png', 84),
+-- قم بتحديث بيانات ياسين بونو:
+('Yassine Bounou', 'Morocco', 'https://cdn.sofifa.net/players/209/981/25_120.png', 'Al-Hilal', 38, 50, 50, 50, 50, 50, 'https://cdn.sofifa.net/flags/ma.png', 84),
+('Trent Alexander-Arnold', 'England', 'https://cdn.sofifa.net/players/231/281/25_120.png', 'Liverpool', 76, 66, 89, 80, 79, 71, 'https://cdn.sofifa.net/flags/gb-eng.png', 87);
+ملخص التعديلات:
+تم تحديث قيم لاعبين مثل Yassine Bounou التي كانت تحتوي على قيم صفرية إلى قيم صالحة (مثل 50).
+جرب هذا التعديل، وإذا واجهت أي مشكلة أخرى، أنا هنا للمساعدة! 😊
+
+
+
+
+
+
+Vous avez dit :
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Dashboard</title>
+</head>
+<body>
+  <header>
+    <h1>FC 2025 Squad Builder</h1>
+    <button id="button1" onclick="showPage('login')">Login</button>
+  </header>
+  <div class="admin-page">
+    <div class="sidebar">
+      <h2>Dashboard</h2>
+      <ul>
+        <li><a><img src="./img/home.png" alt="club" width="30px" height="30px">Home</a></li>
+        <li><a><img src="./img/icone.png" alt="club" width="30px" height="30px">Statistics</a></li>
+        <li><a><img src="./img/clup.png" alt="club" width="30px" height="30px">Add Club</a></li>
+        <li><a>Settings</a></li>
+      </ul>
+    </div>
+    
+
+    <div class="info">
+    <table class="inf">
+
+
+
+
+
+    <tr>
+                                <th>Nom</th>
+                                <th>Position</th>
+                                <th>Rating</th>
+                                <th>Pace</th>
+                                <th>Shooting</th>
+                                <th>Passing</th>
+                                <th>Dribbling</th>
+                                <th>Defending</th>
+                                <th>Physical</th>
+                                <th>Photo</th>
+                                <th>Flag</th>
+                                <th>Club</th>
+                                <th>Action</th>
+                                <button class="button2" onclick="toggleAddPlayerForm()">Add Player</button>
+                            </tr>
+                            <tr>
+                              <a href="modifer">modifier</a>
+                              <a href="delete">delete</a>
+
+                            </tr>"
+ 
+                            </div> 
+
+                            
+                         
+    
+    </table>
+    <?php
+
+
+
+$servername = "localhost";
+$username = "root"; 
+$password = ""; 
+$dbname = "players";  
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+
+$sql="SELECT* FROM PALYER";
+$result+$conn->query($sql);
+if (!$result) {
+  die("connction failde :".$conn->connect_error);
+  
+}
+while($row=$result->fetch_assoc()){
+
+
+
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      echo "<tr>
+              <td>{$row['Nom']}</td>
+              <td>{$row['Position']}</td>
+              <td>{$row['Rating']}</td>
+              <td>{$row['Pace']}</td>
+              <td>{$row['Shooting']}</td>
+              <td>{$row['Passing']}</td>
+              <td>{$row['Dribbling']}</td>
+              <td>{$row['Defending']}</td>
+              <td>{$row['Physical']}</td>
+              <td><img src='{$row['Photo']}' alt='Photo' width='50px'></td>
+              <td><img src='{$row['Flag']}' alt='Flag' width='30px'></td>
+              <td>{$row['Club']}</td>
+              <td>
+                <button onclick=\"location.href='edit.php?id={$row['id']}'\">Modifier</button>
+                <button onclick=\"location.href='delete.php?id={$row['id']}'\">Supprimer</button>
+              </td>
+            </tr>";
+    }
+  }
+}
+
+  ?>
+
+    <div class="add-player">
+      <h1>Add a Player</h1>
+      <form id="playerForm">
+        <input type="text" id="name" placeholder="Name" required>
+        <input type="url" id="nationality" placeholder="Nationality" required>
+        <input type="url" id="photo" placeholder="Image URL" required>
+        <input type="url" id="club" placeholder="Club" required>
+        <input type="number" id="pace" placeholder="Pace" min="1" max="100" required>
+        <input type="number" id="shooting" placeholder="Shooting" min="1" max="100" required>
+        <input type="number" id="passing" placeholder="Passing" min="1" max="100" required>
+        <input type="number" id="dribbling" placeholder="Dribbling" min="1" max="100" required>
+        <input type="number" id="defending" placeholder="Defending" min="1" max="100" required>
+        <input type="number" id="physical" placeholder="Physical" min="1" max="100" required>
+        <input type="url" id="flag" placeholder="Flag URL" required>
+        <input type="number" id="rating" placeholder="Rating" required>
+      </form>
+    </div>
+ 
+  
+    </div>
+
+
+<script src="js.js"></script>
+
+</body>
+</html>
+
+ChatGPT a dit :
+ChatGPT
+يبدو أنك تعمل على صفحة إدارة فريق كرة قدم باستخدام HTML وPHP، والتي تعرض اللاعبين وتسمح بإضافة لاعبين جدد إلى قاعدة البيانات. هناك بعض الملاحظات والتحسينات التي يمكن أن تساعد في تحسين الكود:
+
+1. **خطأ في SQL
+
+
+
+
+
+Vous avez dit :
+Fatal error: Uncaught mysqli_sql_exception: Table 'players.palyer' doesn't exist in C:\laragon\www\fc2025\admin_page.php:78 Stack trace: #0 C:\laragon\www\fc2025\admin_page.php(78): mysqli->query('SELECT* FROM PA...') #1 {main} thrown in C:\laragon\www\fc2025\admin_page.php on line 78
+ChatGPT a dit :
+ChatGPT
+الخطأ الذي تواجهه يشير إلى أن الجدول PALYER غير موجود في قاعدة البيانات. يبدو أن هناك خطأ إملائي في اسم الجدول؛ يجب أن يكون PLAYER بدلاً من PALYER.
+
+لحل المشكلة:
+
+تأكد من أن اسم الجدول في قاعدة البيانات هو PLAYER.
+إذا كان اسم الجدول صحيحًا، قم بتحديث استعلام SQL في الكود ليطابق اسم الجدول بشكل صحيح.
+الحل:
+استبدل السطر الذي يحتوي على استعلام SQL:
+
+php
+Copier le code
+$sql="SELECT* FROM PALYER";
+بالتالي:
+
+php
+Copier le code
+$sql="SELECT* FROM PLAYER";
+بعد ذلك، تأكد من أن الجدول PLAYER موجود في قاعدة البيانات باستخدام أداة مثل phpMyAdmin أو من خلال سطر الأوامر.
+
+
+
+
+
+
+Vous avez dit :
+
+Warning: Undefined variable $result in C:\laragon\www\fc2025\admin_page.php on line 78
+
+Fatal error: Uncaught TypeError: Unsupported operand types: null + mysqli_result in C:\laragon\www\fc2025\admin_page.php:78 Stack trace: #0 {main} thrown in C:\laragon\www\fc2025\admin_page.php on line 78
+ChatGPT a dit :
+ChatGPT
+الخطأ الذي تواجهه يشير إلى أنه لم يتم تعريف المتغير $result بشكل صحيح قبل محاولة استخدامه في استعلام SQL. السبب هو أنك قمت بمحاولة إضافة $result إلى الاستعلام +, لكن $result هو في الواقع غير معرف قبل ذلك.
+
+لحل هذه المشكلة:
+
+يجب عليك التأكد من أن الاستعلام تم تنفيذه بشكل صحيح وأن المتغير $result يتم تعيينه بقيمة من استعلام SQL.
+استخدم شرط if للتحقق من أن الاستعلام نجح.
+الحل:
+php
+Copier le code
+<?php
+
+$servername = "localhost";
+$username = "root"; 
+$password = ""; 
+$dbname = "players";  
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT * FROM PLAYER";
+$result = $conn->query($sql); // يجب أن يتم تخزين النتيجة هنا
+
+// تحقق من أن الاستعلام نجح وأنه تم استرجاع الصفوف
+if ($result) {
+    if ($result->num_rows > 0) {
+        // عرض النتائج
+        while($row = $result->fetch_assoc()) {
+            echo "<tr>
+                      <td>{$row['Nom']}</td>
+                      <td>{$row['Position']}</td>
+                      <td>{$row['Rating']}</td>
+                      <td>{$row['Pace']}</td>
+                      <td>{$row['Shooting']}</td>
+                      <td>{$row['Passing']}</td>
+                      <td>{$row['Dribbling']}</td>
+                      <td>{$row['Defending']}</td>
+                      <td>{$row['Physical']}</td>
+                      <td><img src='{$row['Photo']}' alt='Photo' width='50px'></td>
+                      <td><img src='{$row['Flag']}' alt='Flag' width='30px'></td>
+                      <td>{$row['Club']}</td>
+                      <td>
+                          <button onclick=\"location.href='edit.php?id={$row['id']}'\">Modifier</button>
+                          <button onclick=\"location.href='delete.php?id={$row['id']}'\">Supprimer</button>
+                      </td>
+                  </tr>";
+        }
+    } else {
+        echo "No results found.";
+    }
+} else {
+    // إذا فشل الاستعلام
+    echo "Error: " . $conn->error;
+}
+
+$conn->close();
+
+?>
+التعديلات التي أجريتها:
+تم تعريف المتغير $result بشكل صحيح من خلال استعلام query($sql).
+تم إضافة شرط if ($result) للتحقق من أن الاستعلام تم بنجاح.
+استخدمت num_rows للتحقق من وجود صفوف.
+إذا فشل الاستعلام، سيتم طباعة رسالة خطأ مفصلة.
+
+
+
+
+
+Vous avez dit :
+
+Warning: Undefined array key "Nom" in C:\laragon\www\fc2025\admin_page.php on line 90
+
+Warning: Undefined array key "Position" in C:\laragon\www\fc2025\admin_page.php on line 91
+
+Warning: Undefined array key "Rating" in C:\laragon\www\fc2025\admin_page.php on line 92
+
+Warning: Undefined array key "Pace" in C:\laragon\www\fc2025\admin_page.php on line 93
+
+Warning: Undefined array key "Shooting" in C:\laragon\www\fc2025\admin_page.php on line 94
+
+Warning: Undefined array key "Passing" in C:\laragon\www\fc2025\admin_page.php on line 95
+
+Warning: Undefined array key "Dribbling" in C:\laragon\www\fc2025\admin_page.php on line 96
+
+Warning: Undefined array key "Defending" in C:\laragon\www\fc2025\admin_page.php on line 97
+
+Warning: Undefined array key "Physical" in C:\laragon\www\fc2025\admin_page.php on line 98
+
+Warning: Undefined array key "Photo" in C:\laragon\www\fc2025\admin_page.php on line 99
+
+Warning: Undefined array key "Flag" in C:\laragon\www\fc2025\admin_page.php on line 100
+
+Warning: Undefined array key "Club" in C:\laragon\www\fc2025\admin_page.php on line 101
+ChatGPT a dit :
+ChatGPT
+التحذيرات التي تظهر لك تشير إلى أن الأسماء التي تستخدمها داخل المصفوفة $row غير موجودة في النتيجة من استعلام SQL، أو أن هناك خطأ في الأسماء المستخدمة. بناءً على التحذيرات، يبدو أن هناك مشكلة في الحقول التي تشير إليها في الجدول.
+
+الحل:
+تأكد أن أسماء الأعمدة في الجدول تطابق الحقول التي تستخدمها في الكود (Nom, Position, Rating, إلخ).
+تحقق من أن الاستعلام SELECT * FROM PLAYER يُرجع البيانات بشكل صحيح وأن الأسماء متوافقة مع الحقول الموجودة في قاعدة البيانات.
+التحقق من بنية الجدول:
+قبل المضي قدماً، تأكد أن بنية الجدول تحتوي على الأعمدة بالاسم الصحيح. مثلاً، يجب أن يكون اسم العمود في قاعدة البيانات هو Nom وليس name أو أي اسم آخر.
+
+إذا كنت بحاجة لتصحيح الأعمدة:
+افتح قاعدة البيانات في PhpMyAdmin أو أي أداة إدارة قاعدة بيانات.
+تحقق من الأعمدة في الجدول وتأكد من أسمائها.
+إذا كانت الأسماء في قاعدة البيانات تختلف عن الأسماء التي استخدمتها في الكود، قم بتعديل الكود ليطابق الأسماء الصحيحة في قاعدة البيانات.
+
+مثال للتعديل بناءً على الأسماء الصحيحة (افترض أن الأسماء في قاعدة البيانات هي name, position, إلخ):
+php
+Copier le code
+<?php
+
+$servername = "localhost";
+$username = "root"; 
+$password = ""; 
+$dbname = "players";  
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT * FROM PLAYER";
+$result = $conn->query($sql); // يجب أن يتم تخزين النتيجة هنا
+
+// تحقق من أن الاستعلام نجح وأنه تم استرجاع الصفوف
+if ($result) {
+    if ($result->num_rows > 0) {
+        // عرض النتائج
+        while($row = $result->fetch_assoc()) {
+            echo "<tr>
+                      <td>{$row['name']}</td>
+                      <td>{$row['position']}</td>
+                      <td>{$row['rating']}</td>
+                      <td>{$row['pace']}</td>
+                      <td>{$row['shooting']}</td>
+                      <td>{$row['passing']}</td>
+                      <td>{$row['dribbling']}</td>
+                      <td>{$row['defending']}</td>
+                      <td>{$row['physical']}</td>
+                      <td><img src='{$row['photo']}' alt='Photo' width='50px'></td>
+                      <td><img src='{$row['flag']}' alt='Flag' width='30px'></td>
+                      <td>{$row['club']}</td>
+                      <td>
+                          <button onclick=\"location.href='edit.php?id={$row['id']}'\">Modifier</button>
+                          <button onclick=\"location.href='delete.php?id={$row['id']}'\">Supprimer</button>
+                      </td>
+                  </tr>";
+        }
+    } else {
+        echo "No results found.";
+    }
+} else {
+    // إذا فشل الاستعلام
+    echo "Error: " . $conn->error;
+}
+
+$conn->close();
+
+?>
+الملاحظات:
+تأكد من أن أسماء الأعمدة في قاعدة البيانات هي name, position, rating, pace, shooting, إلخ. إذا كانت هذه الأسماء مختلفة، يجب أن تعدل الكود ليناسب الأسماء الدقيقة.
+
+
+
+
+
+Vous avez dit :
+ma3diche position fi tablo wa5a tzidha 
+ChatGPT a dit :
+ChatGPT
+إذا كنت ترغب في إضافة عمود position إلى جدول اللاعبين، يمكنك استخدام الأمر التالي في SQL لإضافة العمود إلى جدولك:
+
+sql
+Copier le code
+ALTER TABLE PLAYER ADD COLUMN position VARCHAR(255);
+خطوات:
+الخطوة الأولى: تعديل قاعدة البيانات: استخدم الأمر السابق لإضافة العمود position إلى جدول PLAYER في قاعدة البيانات. يمكنك تنفيذ هذا الأمر عبر PhpMyAdmin أو باستخدام أداة مثل MySQL Workbench.
+
+الخطوة الثانية: تحديث الكود: بعد إضافة العمود position، يجب تحديث الكود في صفحة PHP لعرض هذا العمود.
+
+تحديث الكود في PHP:
+تأكد من أنك تقوم باستخدام العمود position بشكل صحيح في استعلام SQL وكود PHP. إليك التحديث:
+
+php
+Copier le code
+<?php
+
+$servername = "localhost";
+$username = "root"; 
+$password = ""; 
+$dbname = "players";  
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT * FROM PLAYER";
+$result = $conn->query($sql);
+
+if ($result) {
+    if ($result->num_rows > 0) {
+        // عرض النتائج
+        while($row = $result->fetch_assoc()) {
+            echo "<tr>
+                      <td>{$row['name']}</td>
+                      <td>{$row['position']}</td> <!-- العمود الجديد -->
+                      <td>{$row['rating']}</td>
+                      <td>{$row['pace']}</td>
+                      <td>{$row['shooting']}</td>
+                      <td>{$row['passing']}</td>
+                      <td>{$row['dribbling']}</td>
+                      <td>{$row['defending']}</td>
+                      <td>{$row['physical']}</td>
+                      <td><img src='{$row['photo']}' alt='Photo' width='50px'></td>
+                      <td><img src='{$row['flag']}' alt='Flag' width='30px'></td>
+                      <td>{$row['club']}</td>
+                      <td>
+                          <button onclick=\"location.href='edit.php?id={$row['id']}'\">Modifier</button>
+                          <button onclick=\"location.href='delete.php?id={$row['id']}'\">Supprimer</button>
+                      </td>
+                  </tr>";
+        }
+    } else {
+        echo "No results found.";
+    }
+} else {
+    echo "Error: " . $conn->error;
+}
+
+$conn->close();
+
+?>
+ملاحظات:
+عند إضافة هذا العمود الجديد، تأكد من تحديث الواجهة الأمامية (HTML) بحيث يتم تضمين خانة position الجديدة.
+يمكنك الآن إدخال أو تحديث بيانات اللاعبين مع قيمة position بشكل صحيح.
+
+
+
+
+
+Vous avez dit :
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Dashboard</title>
+</head>
+<body>
+  <header>
+    <h1>FC 2025 Squad Builder</h1>
+    <button id="button1" onclick="showPage('login')">Login</button>
+  </header>
+  <div class="admin-page">
+    <div class="sidebar">
+      <h2>Dashboard</h2>
+      <ul>
+        <li><a><img src="./img/home.png" alt="club" width="30px" height="30px">Home</a></li>
+        <li><a><img src="./img/icone.png" alt="club" width="30px" height="30px">Statistics</a></li>
+        <li><a><img src="./img/clup.png" alt="club" width="30px" height="30px">Add Club</a></li>
+        <li><a>Settings</a></li>
+      </ul>
+    </div>
+    
+
+    <div class="info">
+    <table class="inf">
+
+
+
+
+
+    <tr>
+                                <th>Nom</th>
+                                <th>Position</th>
+                                <th>Rating</th>
+                                <th>Pace</th>
+                                <th>Shooting</th>
+                                <th>Passing</th>
+                                <th>Dribbling</th>
+                                <th>Defending</th>
+                                <th>Physical</th>
+                                <th>Photo</th>
+                                <th>Flag</th>
+                                <th>Club</th>
+                                <th>Action</th>
+                                <button class="button2" onclick="toggleAddPlayerForm()">Add Player</button>
+                            </tr>
+                            <tr>
+                              <a href="modifer">modifier</a>
+                              <a href="delete">delete</a>
+
+                            </tr>"
+ 
+                            </div> 
+
+                            
+                         
+    
+    </table>
+    <?php
+
+
+
+$servername = "localhost";
+$username = "root"; 
+$password = ""; 
+$dbname = "players";  
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+
+$sql="SELECT* FROM player";
+$result = $conn->query($sql);
+if (!$result) {
+  die("connction failde :".$conn->connect_error);
+  
+}
+while($row=$result->fetch_assoc()){
+
+
+
+  if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+      echo "<tr>
+                 <td>{$row['name']}</td>
+                      <td>{$row['position']}</td>
+                      <td>{$row['rating']}</td>
+                      <td>{$row['pace']}</td>
+                      <td>{$row['shooting']}</td>
+                      <td>{$row['passing']}</td>
+                      <td>{$row['dribbling']}</td>
+                      <td>{$row['defending']}</td>
+                      <td>{$row['physical']}</td>
+                      <td><img src='{$row['photo_url']}' alt='Photo' width='50px'></td>
+                      <td><img src='{$row['flag_url']}' alt='Flag' width='30px'></td>
+                      
+                      <td>{$row['club']}</td>
+                      <td>
+                          <button>Modifier</button>
+                          <button >Supprimer</button>
+                      </td>
+                  </tr>";
+    }
+  }
+}
+
+  ?>
+
+    <div class="add-player">
+      <h1>Add a Player</h1>
+      <form id="playerForm">
+        <input type="text" id="name" placeholder="Name" required>
+        <input type="url" id="nationality" placeholder="Nationality" required>
+        <input type="url" id="photo" placeholder="Image URL" required>
+        <input type="url" id="club" placeholder="Club" required>
+        <input type="number" id="pace" placeholder="Pace" min="1" max="100" required>
+        <input type="number" id="shooting" placeholder="Shooting" min="1" max="100" required>
+        <input type="number" id="passing" placeholder="Passing" min="1" max="100" required>
+        <input type="number" id="dribbling" placeholder="Dribbling" min="1" max="100" required>
+        <input type="number" id="defending" placeholder="Defending" min="1" max="100" required>
+        <input type="number" id="physical" placeholder="Physical" min="1" max="100" required>
+        <input type="url" id="flag" placeholder="Flag URL" required>
+        <input type="number" id="rating" placeholder="Rating" required>
+      </form>
+    </div>
+ 
+  
+    </div>
+
+
+<script src="js.js"></script>
+
+</body>
+</html>
+ChatGPT a dit :
+ChatGPT
+يبدو أن هناك بعض المشكلات في الكود الذي أرسلته. إليك بعض الملاحظات والتصحيحات:
+
+الاستعلام SQL: تأكد من أن اسم الجدول في قاعدة البيانات هو player وليس PALYER أو أي شيء آخر. تأكد من أن العمود الذي تستخدمه في الاستعلام متطابق مع الأعمدة في الجدول.
+
+دورة while غير ضرورية:
+
+
+
+
+
+
+Vous avez dit :
+bghit ci disne zwin lhad tablo bohdo hit chi al5 3adi css ta3o 
+ChatGPT a dit :
+ChatGPT
+لتنسيق الجدول بشكل جميل باستخدام CSS، يمكنك إضافة بعض الأنماط التي ستجعل الجدول أكثر جاذبية وسهولة في القراءة. إليك مثالاً لتصميم جدول باستخدام CSS:
+
+css
+Copier le code
+/* إضافة خلفية وتنسيق الجدول */
+table.inf {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #f4f4f4;
+}
+
+/* تنسيق الخلايا */
+table.inf th, table.inf td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+/* تنسيق العناوين */
+table.inf th {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+}
+
+/* تنسيق السطور بالتناوب */
+table.inf tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* تنسيق السطور عند المرور عليها */
+table.inf tr:hover {
+    background-color: #ddd;
+}
+
+/* تنسيق الأزرار */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* تنسيق الصور داخل الجدول */
+td img {
+    width: 50px;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* تنسيق رأس الصفحة */
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 24px;
+}
+
+/* تصميم الجانبي (Sidebar) */
+.sidebar {
+    width: 250px;
+    background-color: #333;
+    padding: 20px;
+    color: white;
+    position: fixed;
+    height: 100%;
+}
+
+.sidebar h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.sidebar ul li a:hover {
+    color: #4CAF50;
+}
+
+/* تنسيق النموذج لإضافة لاعب */
+.add-player {
+    margin-left: 270px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.add-player h1 {
+    margin-bottom: 20px;
+}
+
+.add-player input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.add-player input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+شرح بعض الأنماط:
+table.inf: تنسيق الجدول، مع إضافة خلفية خفيفة وتوسيط النص.
+th و td: تنسيق الأعمدة في الجدول، مع إضافة حواف وضبط الحشو.
+tr:nth-child(even): تلوين السطور بالتناوب لجعلها أكثر وضوحاً.
+button: إضافة تصميم للأزرار مع تأثير التغيير عند المرور عليها.
+header و .sidebar: تنسيق الجزء العلوي والجانبي.
+إضافة الأنماط في ملف style.css:
+قم بنسخ الكود السابق إلى ملف style.css الذي قمت بربطه في الكود HTML.
+تأكد من أن الكود يعمل بشكل جيد بعد إضافة هذه الأنماط في الصفحة.
+بهذا الشكل، سيظهر الجدول بمظهر احترافي مع خلفيات وتنسيقات مريحة للعين.
+
+
+
+
+
+
+Vous avez dit :
+
+    <div class="add-player">
+      <h1>Add a Player</h1>
+      <form id="playerForm">
+        <input type="text" id="name" placeholder="Name" required>
+        <input type="url" id="nationality" placeholder="Nationality" required>
+        <input type="url" id="photo" placeholder="Image URL" required>
+        <input type="url" id="club" placeholder="Club" required>
+        <input type="number" id="pace" placeholder="Pace" min="1" max="100" required>
+        <input type="number" id="shooting" placeholder="Shooting" min="1" max="100" required>
+        <input type="number" id="passing" placeholder="Passing" min="1" max="100" required>
+        <input type="number" id="dribbling" placeholder="Dribbling" min="1" max="100" required>
+        <input type="number" id="defending" placeholder="Defending" min="1" max="100" required>
+        <input type="number" id="physical" placeholder="Physical" min="1" max="100" required>
+        <input type="url" id="flag" placeholder="Flag URL" required>
+        <input type="number" id="rating" placeholder="Rating" required>
+      </form>
+    </div>
+ 
+  
+    </div>
+
+
+CREATE TABLE player (
+    id_player INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    nationality VARCHAR(255) NOT NULL,
+    photo_url TEXT NOT NULL,
+    club VARCHAR(255) NOT NULL,
+    pace INT CHECK (pace BETWEEN 1 AND 100),
+    shooting INT CHECK (shooting BETWEEN 1 AND 100),
+    passing INT CHECK (passing BETWEEN 1 AND 100),
+    dribbling INT CHECK (dribbling BETWEEN 1 AND 100),
+    defending INT CHECK (defending BETWEEN 1 AND 100),
+    physical INT CHECK (physical BETWEEN 1 AND 100),
+    flag_url TEXT NOT NULL,
+    rating INT NOT NULL
+);
+
+bghit hado ibcw had table
+ChatGPT a dit :
+ChatGPT
+لتنفيذ إضافة اللاعبين إلى قاعدة البيانات باستخدام نموذج HTML الذي أرسلته، عليك استخدام PHP للتعامل مع البيانات المرسلة من النموذج، ومن ثم إضافتها إلى جدول player في قاعدة البيانات.
+
+الخطوات اللازمة:
+إضافة البيانات إلى قاعدة البيانات (PHP):
+
+عليك تعديل الكود بحيث يقوم بإرسال البيانات من النموذج إلى قاعدة البيانات عند تقديم النموذج.
+ستحتاج إلى ملف PHP لمعالجة البيانات المرسلة من النموذج.
+إجراء التعديلات على نموذج HTML:
+
+ستحتاج إلى إضافة خاصية action وmethod إلى النموذج لكي يتم إرسال البيانات إلى ملف PHP.
+التعديل على نموذج HTML:
+html
+Copier le code
+<div class="add-player">
+  <h1>Add a Player</h1>
+  <form id="playerForm" method="POST" action="add_player.php">
+    <input type="text" name="name" id="name" placeholder="Name" required>
+    <input type="url" name="nationality" id="nationality" placeholder="Nationality" required>
+    <input type="url" name="photo" id="photo" placeholder="Image URL" required>
+    <input type="text" name="club" id="club" placeholder="Club" required>
+    <input type="number" name="pace" id="pace" placeholder="Pace" min="1" max="100" required>
+    <input type="number" name="shooting" id="shooting" placeholder="Shooting" min="1" max="100" required>
+    <input type="number" name="passing" id="passing" placeholder="Passing" min="1" max="100" required>
+    <input type="number" name="dribbling" id="dribbling" placeholder="Dribbling" min="1" max="100" required>
+    <input type="number" name="defending" id="defending" placeholder="Defending" min="1" max="100" required>
+    <input type="number" name="physical" id="physical" placeholder="Physical" min="1" max="100" required>
+    <input type="url" name="flag" id="flag" placeholder="Flag URL" required>
+    <input type="number" name="rating" id="rating" placeholder="Rating" required>
+    <button type="submit">Add Player</button>
+  </form>
+</div>
+إنشاء ملف add_player.php لمعالجة البيانات:
+php
+Copier le code
+<?php
+$servername = "localhost";
+$username = "root"; 
+$password = ""; 
+$dbname = "players";  
+
+// إنشاء الاتصال مع قاعدة البيانات
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// التحقق من الاتصال
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+// التحقق من أن البيانات تم إرسالها عبر POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // استلام البيانات من النموذج
+    $name = $_POST['name'];
+    $nationality = $_POST['nationality'];
+    $photo_url = $_POST['photo'];
+    $club = $_POST['club'];
+    $pace = $_POST['pace'];
+    $shooting = $_POST['shooting'];
+    $passing = $_POST['passing'];
+    $dribbling = $_POST['dribbling'];
+    $defending = $_POST['defending'];
+    $physical = $_POST['physical'];
+    $flag_url = $_POST['flag'];
+    $rating = $_POST['rating'];
+
+ 
+    ?>
+  
+    </div>
+
+
+
+<script src="js.js"></script>
+
+</body>
+</html>
+
+
