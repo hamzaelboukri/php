@@ -7,28 +7,27 @@
 
 
 
-CREATE TABLE player (
-    id_player INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    nationality VARCHAR(255) NOT NULL,
-    photo_url TEXT NOT NULL,
-    club VARCHAR(255) NOT NULL,
-    pace INT CHECK (pace BETWEEN 1 AND 100),
-    shooting INT CHECK (shooting BETWEEN 1 AND 100),
-    passing INT CHECK (passing BETWEEN 1 AND 100),
-    dribbling INT CHECK (dribbling BETWEEN 1 AND 100),
-    defending INT CHECK (defending BETWEEN 1 AND 100),
-    physical INT CHECK (physical BETWEEN 1 AND 100),
-    flag_url TEXT NOT NULL,
-    rating INT NOT NULL
-);
+CREATE TABLE player(
+    PlayerID int primary key AUTO_INCREMENT ,
+    Name varchar(255) NOT NULL UNIQUE,
+    ImagePlayer varchar(255) NOT NULL UNIQUE,
+    Position varchar(255) NOT NULL,
+    Rating int NOT NULL,
+    ClubID int NOT NULL,
+    NationalityID int
+    );
 
+CREATE TABLE club(
+    ClubID int primary key AUTO_INCREMENT ,
+    ClubName varchar(255)  NOT NULL UNIQUE,
+    ClubImage varchar(255) NOT NULL UNIQUE
+    );
 
-CREATE TABLE nationalities (
-    id_nationality INT AUTO_INCREMENT PRIMARY KEY,
-    nationality_name VARCHAR(100) NOT NULL  UNIQUE,
-    photo_url TEXT NOT NULL
-);
+CREATE TABLE nationality(
+    NationalityID int primary key AUTO_INCREMENT,
+    NationalityName varchar(255) NOT NULL UNIQUE,
+    NationalityImage varchar(255) NOT NULL UNIQUE
+    );
 
 
 CREATE TABLE users (

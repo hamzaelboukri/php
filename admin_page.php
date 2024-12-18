@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <title>Dashboard</title>
+
+  <!-- link bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
+   <title>Dashboard</title>
 </head>
 <body>
   <header>
@@ -15,15 +18,81 @@
     <div class="sidebar">
       <h2>Dashboard</h2>
       <ul>
-        <li><a><img src="./img/home.png" alt="club" width="30px" height="30px">Home</a></li>
-        <li><a><img src="./img/icone.png" alt="club" width="30px" height="30px">Statistics</a></li>
-        <li><a><img src="./img/clup.png" alt="club" width="30px" height="30px">Add Club</a></li>
+      <li>
+    <a href="index.php">
+        <img src="./img/home.png" alt="club" width="30px" height="30px"> Home
+    </a>
+</li>
+<li>
+    <a href="stc.php">
+        <img src="./img/icone.png" alt="club" width="30px" height="30px"> Statistics
+    </a>
+</li>
+<li>
+    <a href="clup.php">
+        <img src="./img/clup.png" alt="club" width="30px" height="30px"> Add Club
+    </a>
+</li>
+<li>
+    <a href="ntc.php">
+        <img src="./img/clup.png" alt="club" width="30px" height="30px"> Nationalities
+    </a>
+</li>
+
+
         <li><a>Settings</a></li>
       </ul>
     </div>
     
 
     <div class="info">
+      <button type="button" class="btn btn-success" onclick="toggleAddPlayerForm()" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Add Player
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">Etrer la NationalitÃ©
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                            <div class="add-player">
+  <h1>Add a Player</h1>
+  <form id="playerForm" method="POST">
+    <input type="text" name="name" id="name" placeholder="Name" required>
+    <input type="url" name="nationality" id="nationality" placeholder="Nationality" required>
+    <input type="url" name="photo" id="photo" placeholder="Image URL" required>
+    <input type="text" name="club" id="club" placeholder="Club" required>
+   <input type="text" name="position" id="Position" placeholder="Position" >
+    <input type="number" name="pace" id="pace" placeholder="Pace" min="1" max="100" required>
+    <input type="number" name="shooting" id="shooting" placeholder="Shooting" min="1" max="100" required>
+    <input type="number" name="passing" id="passing" placeholder="Passing" min="1" max="100" required>
+    <input type="number" name="dribbling" id="dribbling" placeholder="Dribbling" min="1" max="100" required>
+    <input type="number" name="defending" id="defending" placeholder="Defending" min="1" max="100" required>
+    <input type="number" name="physical" id="physical" placeholder="Physical" min="1" max="100" required>
+    <input type="url" name="flag" id="flag" placeholder="Flag URL" required>
+    <input type="number" name="rating" id="rating" placeholder="Rating" required>
+    <button type="submit">Add Player</button>
+
+  </form>
+</div>
+
+                               
+                            </div>
+                       
+
+                        </div>
+                    </div>
+                </div>
+                <!--fin modal  -->
+
     <table class="inf">
 
 
@@ -44,7 +113,6 @@
                                 <th>Flag</th>
                                 <th>Club</th>
                                 <th>Action</th>
-                                <button class="button2" onclick="toggleAddPlayerForm()">Add Player</button>
                             </tr>
                       
                             </div> 
@@ -54,12 +122,12 @@
     
     <?php
 
-
+//get dtat from table
 
 $servername = "localhost";
 $username = "root"; 
 $password = ""; 
-$dbname = "players";  
+$dbname = "fc_2025";  
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -78,7 +146,7 @@ while($row=$result->fetch_assoc()){
 
 
 
-  if ($result->num_rows > 0) {
+  if ($result->num_rows>0) {
     while ($row = $result->fetch_assoc()) {
       echo "<tr>
                  <td>{$row['name']}</td>
@@ -107,23 +175,37 @@ while($row=$result->fetch_assoc()){
     </table>
 
 
+
+
+
+
+
+
+
 <?php
+
+
+
 
 $servername = "localhost";
 $username = "root"; 
 $password = ""; 
-$dbname = "players";  
+$dbname = "fc_2025";  
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+if ($_SERVER["REQUEST_METHOD"]=="POST") {
+ 
+
   $name = $_POST['name'];
   $nationality = $_POST['nationality'];
   $photo_url = $_POST['photo'];
   $club = $_POST['club'];
+  $position=$_POST['position'];
   $pace = $_POST['pace'];
   $shooting = $_POST['shooting'];
   $passing = $_POST['passing'];
@@ -132,31 +214,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $physical = $_POST['physical'];
   $flag_url = $_POST['flag'];
   $rating = $_POST['rating'];
+
+  $sql = "INSERT INTO player (name, nationality, photo_url, club, pace, shooting, passing, dribbling, defending, physical, flag_url, rating) 
+      VALUES ('$name',
+       '$nationality',
+       '$photo_url', 
+       '$club',
+       '$pace',
+       '$shooting',
+       '$passing',
+       '$dribbling',
+       '$defending', 
+       '$physical',
+       '$flag_url',
+       '$rating')";
+  
+  if ($conn->query($sql) === TRUE) {
+      echo "gg";
+  } else {
+      echo "rr: " . $sql . "<br>" . $conn->error;
+  }
 }
 
 ?>
 
-<div class="add-player">
-  <h1>Add a Player</h1>
-  <form id="playerForm" method="POST" action="add_player.php">
-    <input type="text" name="name" id="name" placeholder="Name" required>
-    <input type="url" name="nationality" id="nationality" placeholder="Nationality" required>
-    <input type="url" name="photo" id="photo" placeholder="Image URL" required>
-    <input type="text" name="club" id="club" placeholder="Club" required>
-    <input type="number" name="pace" id="pace" placeholder="Pace" min="1" max="100" required>
-    <input type="number" name="shooting" id="shooting" placeholder="Shooting" min="1" max="100" required>
-    <input type="number" name="passing" id="passing" placeholder="Passing" min="1" max="100" required>
-    <input type="number" name="dribbling" id="dribbling" placeholder="Dribbling" min="1" max="100" required>
-    <input type="number" name="defending" id="defending" placeholder="Defending" min="1" max="100" required>
-    <input type="number" name="physical" id="physical" placeholder="Physical" min="1" max="100" required>
-    <input type="url" name="flag" id="flag" placeholder="Flag URL" required>
-    <input type="number" name="rating" id="rating" placeholder="Rating" required>
-    <button type="submit">Add Player</button>
-  </form>
-</div>
 
 
-
+<!-- link bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" ></script>
 <script src="js.js"></script>
 
 </body>

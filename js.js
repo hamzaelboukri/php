@@ -9,5 +9,5 @@ function showPage(page) {
 
   function toggleAddPlayerForm() {
     const form = document.querySelector('.add-player');
-    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    form.style.display = 'block'
   }
