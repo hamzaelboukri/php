@@ -173,6 +173,7 @@ form button:hover {
   text-decoration: underline;
 }
 
+
 .info {
   flex: 1; 
   background-color: #fff;
@@ -260,4 +261,4 @@ table.inf tr:nth-child(even) {
   filter: drop-shadow(0 4px 10px rgb(154, 180, 9));
 }
 
-
+/* end page */

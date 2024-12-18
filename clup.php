@@ -24,7 +24,7 @@
     </a>
 </li>
 <li>
-    <a href="stc.php">
+    <a href="admin_page.php">
         <img src="./img/icone.png" alt="club" width="30px" height="30px"> Statistics
     </a>
 </li>
@@ -58,23 +58,82 @@
 
 
     <?php
+    
+
+$servername = "localhost";
+$username = "root"; 
+$password = ""; 
+$dbname = "fc_2025";  
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $club_name = $_POST['club_name'];
     $club_image = $_POST['club_image'];
 
 
-    $stmt = $conn->prepare("INSERT INTO club (clubname, clubimag) VALUES (?, ?)");
-    $stmt->bind_param("ss", $name, $imageURL);
+    $stmt = $conn->prepare("INSERT INTO club (Clubname, ClubImage) VALUES (?, ?)");
+    $stmt->bind_param("ss", $club_name, $club_image);
+ if ($stmt->execute ()) {
+    echo 'ssss';
+ }
 
- 
 }
 $conn->close();
-    if (!empty($club_name) && !empty($club_image)) {
-        echo "Club Name: " . htmlspecialchars($club_name) . "<br>";
-        echo "Image URL: <img src='" . htmlspecialchars($club_image) . "' alt='Club Image' width='100px'>";
-    }
+    
+    
 
 ?>
+
+
+<div class="info">
+
+<table class="inf">
+<tr>
+    <th>club Name</th>
+    <th>club Image</th>
+    <th>Actions</th>
+</tr>
+
+<?php
+include 'conn.php';
+
+$sql="SELECT* FROM  club ";
+$result = $conn->query($sql);
+if (!$result) {
+  die("connction failde :".$conn->connect_error);
+  
+}
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "<tr>
+                <td>{$row['ClubName']}</td>
+                <td><img src='{$row['ClubImage']}' alt='Image' width='50px'></td>
+                <td>
+                    <button>Modifier</button>
+                    <button>Supprimer</button>
+                </td>
+              </tr>";
+    }
+    	
+
+
+
+
+
+} else {
+    echo "<tr><td colspan='3'>No nationalities found</td></tr>";
+}
+?>
+
+
+
 
 </body>
 </html>

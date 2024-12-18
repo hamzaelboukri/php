@@ -24,7 +24,7 @@
     </a>
 </li>
 <li>
-    <a href="stc.php">
+    <a href="admin_page.php">
         <img src="./img/icone.png" alt="club" width="30px" height="30px"> Statistics
     </a>
 </li>
@@ -45,7 +45,7 @@
     </div>
     
 
-    <div class="info">
+    
       <button type="button" class="btn btn-success" onclick="toggleAddPlayerForm()" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Add Player
                 </button>
@@ -56,7 +56,8 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">Etrer la NationalitÃ©
+                                <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">Etrer PALYER
+
                                 </h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
@@ -67,10 +68,26 @@
   <h1>Add a Player</h1>
   <form id="playerForm" method="POST">
     <input type="text" name="name" id="name" placeholder="Name" required>
-    <input type="url" name="nationality" id="nationality" placeholder="Nationality" required>
+    <select name="nas">
+
+    <?php
+include 'conn.php';
+    $sql="SELECT * FORM nationality";
+    $result = $conn->query($sql);
+if (!$result) {
+  die("connction failde :".$conn->connect_error);
+  
+}
+while ($row = $result->fetch_assoc()) {
+  echo "<option value='" . $row['NationalityID'] . "'>" . $row['NationalityName'] . "</option>";
+}
+    ?>
+
+</select>
+    
     <input type="url" name="photo" id="photo" placeholder="Image URL" required>
     <input type="text" name="club" id="club" placeholder="Club" required>
-   <input type="text" name="position" id="Position" placeholder="Position" >
+    <input type="text" name="position" id="Position" placeholder="Position" >
     <input type="number" name="pace" id="pace" placeholder="Pace" min="1" max="100" required>
     <input type="number" name="shooting" id="shooting" placeholder="Shooting" min="1" max="100" required>
     <input type="number" name="passing" id="passing" placeholder="Passing" min="1" max="100" required>
@@ -142,9 +159,8 @@ if (!$result) {
   die("connction failde :".$conn->connect_error);
   
 }
+
 while($row=$result->fetch_assoc()){
-
-
 
   if ($result->num_rows>0) {
     while ($row = $result->fetch_assoc()) {
@@ -242,7 +258,14 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
 
 <!-- link bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" ></script>
-<script src="js.js"></script>
+<script src="js.js">
+
+
+
+
+
+
+</script>
 
 </body>
 </html>
