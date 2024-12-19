@@ -45,7 +45,7 @@
     </div>
     
 
-    
+    <div class ="info">
       <button type="button" class="btn btn-success" onclick="toggleAddPlayerForm()" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
       Add Player
        </button>
@@ -132,7 +132,7 @@ include 'conn.php';
                 </div>
                 <!--fin modal  -->
 
-    <table class="info">
+    <table class="inf">
     <tr>
                                 <th>Nom</th>
                                 <th>Position</th>

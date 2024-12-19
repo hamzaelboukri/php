@@ -65,7 +65,7 @@ form input:focus {
   outline: none;
 }
 
-form button {
+form button ,.btn {
   padding: 10px;
   font-size: 16px;
   color: #fff;

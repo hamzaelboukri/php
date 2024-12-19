@@ -116,8 +116,8 @@ if ($result->num_rows > 0) {
                 <td>{$row['ClubName']}</td>
                 <td><img src='{$row['ClubImage']}' alt='Image' width='50px'></td>
                 <td>
-                    <button>Modifier</button>
-                    <button>Supprimer</button>
+                         <a href='../modifer/edit_club.php?id={$row['ClubID']}' class='btn btn-warning'>Modifier</a>
+                     <a href='suprim_club.php?delete_id={$row['ClubID']}' class='btn btn-danger'>Supprimer</a>
                 </td>
               </tr>";
     }
