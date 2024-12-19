@@ -47,8 +47,8 @@
 
     
       <button type="button" class="btn btn-success" onclick="toggleAddPlayerForm()" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    Add Player
-                </button>
+      Add Player
+       </button>
 
                 <!-- Modal -->
                 <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -68,25 +68,47 @@
   <h1>Add a Player</h1>
   <form id="playerForm" method="POST">
     <input type="text" name="name" id="name" placeholder="Name" required>
-    <select name="nas">
+    <!-- add nationality -->
 
-    <?php
+    <select name="NationalityID"  required>
+    <option value="">Select Nationality</option>
+
+       <?php
 include 'conn.php';
-    $sql="SELECT * FORM nationality";
-    $result = $conn->query($sql);
-if (!$result) {
-  die("connction failde :".$conn->connect_error);
-  
-}
-while ($row = $result->fetch_assoc()) {
-  echo "<option value='" . $row['NationalityID'] . "'>" . $row['NationalityName'] . "</option>";
-}
-    ?>
+    $sql="SELECT * FROM nationality";
 
+    $result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+  while ($row = $result->fetch_assoc()) {
+
+    echo "<option value='" . $row['NationalityID'] . "'>" . $row['NationalityName'] . "</option>";
+  }
+}
+$conn->close();
+
+    ?>
 </select>
     
     <input type="url" name="photo" id="photo" placeholder="Image URL" required>
-    <input type="text" name="club" id="club" placeholder="Club" required>
+  
+<!-- add club -->
+
+<select name="ClubID" required>
+    <option value="">Select club</option>
+
+    <?php
+include 'conn.php';
+
+                  $sql = "SELECT * FROM club";
+                  $result = $conn->query($sql);
+                  while ($row = $result->fetch_assoc()) {
+                      echo "<option value='" . $row['ClubID'] . "'>" . $row['ClubName'] . "</option>";
+                  }
+                ?>
+</select>
+
     <input type="text" name="position" id="Position" placeholder="Position" >
     <input type="number" name="pace" id="pace" placeholder="Pace" min="1" max="100" required>
     <input type="number" name="shooting" id="shooting" placeholder="Shooting" min="1" max="100" required>
@@ -110,12 +132,7 @@ while ($row = $result->fetch_assoc()) {
                 </div>
                 <!--fin modal  -->
 
-    <table class="inf">
-
-
-
-
-
+    <table class="info">
     <tr>
                                 <th>Nom</th>
                                 <th>Position</th>
@@ -131,128 +148,93 @@ while ($row = $result->fetch_assoc()) {
                                 <th>Club</th>
                                 <th>Action</th>
                             </tr>
-                      
-                            </div> 
 
-                            
-                         
-    
-    <?php
-
-//get dtat from table
-
+                </div>
+                
+                            <?php
 $servername = "localhost";
-$username = "root"; 
-$password = ""; 
-$dbname = "fc_2025";  
+$username = "root";
+$password = "";
+$dbname = "fc_2025";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
 
 
-$sql="SELECT* FROM player";
+$sql = "SELECT 
+player.*,
+nationality.NationalityName,
+club.ClubName
+FROM 
+player
+LEFT JOIN nationality ON player.NationalityID = nationality.NationalityID
+LEFT JOIN club ON player.ClubID = club.ClubID";
+
 $result = $conn->query($sql);
-if (!$result) {
-  die("connction failde :".$conn->connect_error);
-  
-}
 
-while($row=$result->fetch_assoc()){
-
-  if ($result->num_rows>0) {
+if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-      echo "<tr>
-                 <td>{$row['name']}</td>
-                      <td>{$row['position']}</td>
-                      <td>{$row['rating']}</td>
-                      <td>{$row['pace']}</td>
-                      <td>{$row['shooting']}</td>
-                      <td>{$row['passing']}</td>
-                      <td>{$row['dribbling']}</td>
-                      <td>{$row['defending']}</td>
-                      <td>{$row['physical']}</td>
-                      <td><img src='{$row['photo_url']}' alt='Photo' width='50px'></td>
-                      <td><img src='{$row['flag_url']}' alt='Flag' width='30px'></td>
-                      
-                      <td>{$row['club']}</td>
-                      <td>
-                          <button>Modifier</button>
-                          <button >Supprimer</button>
-                      </td>
-                  </tr>";
+        echo "<tr>
+                 <td>{$row['Name']}</td>
+                 <td>{$row['Position']}</td>
+                 <td>{$row['Rating']}</td>
+                 <td>{$row['Pace']}</td>
+                 <td>{$row['Shooting']}</td>
+                 <td>{$row['Passing']}</td>
+                 <td>{$row['Dribbling']}</td>
+                 <td>{$row['Defending']}</td>
+                 <td>{$row['Physical']}</td>
+                 <td><img src='{$row['ImagePlayer']}' alt='Photo' width='50px'></td>
+                 <td><img src='{$row['FlagURL']}' alt='Flag' width='30px'></td>
+                 <td>" . ($row['ClubName'] ?? 'N/A') . "</td>
+                 <td>
+                     <a href='edit_player.php?id={$row['PlayerID']}' class='btn btn-warning'>Modifier</a>
+                     <a href='admin_page.php?delete_id={$row['PlayerID']}' class='btn btn-danger'>Supprimer</a>
+                 </td>
+              </tr>";
     }
-  }
 }
 
-  ?>
-    </table>
-
-
-
-
-
-
-
-
-
-<?php
-
-
-
-
-$servername = "localhost";
-$username = "root"; 
-$password = ""; 
-$dbname = "fc_2025";  
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-
-if ($_SERVER["REQUEST_METHOD"]=="POST") {
  
 
-  $name = $_POST['name'];
-  $nationality = $_POST['nationality'];
-  $photo_url = $_POST['photo'];
-  $club = $_POST['club'];
-  $position=$_POST['position'];
-  $pace = $_POST['pace'];
-  $shooting = $_POST['shooting'];
-  $passing = $_POST['passing'];
-  $dribbling = $_POST['dribbling'];
-  $defending = $_POST['defending'];
-  $physical = $_POST['physical'];
-  $flag_url = $_POST['flag'];
-  $rating = $_POST['rating'];
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST['name'];
+    $nationality = $_POST['NationalityID'];
+    $photo_url = $_POST['photo'];
+    $club = $_POST['ClubID'];
+    $position = $_POST['position'];
+    $pace = (int)$_POST['pace'];
+    $shooting = (int)$_POST['shooting'];
+    $passing = (int)$_POST['passing'];
+    $dribbling = (int)$_POST['dribbling'];
+    $defending = (int)$_POST['defending'];
+    $physical = (int)$_POST['physical'];
+    $flag_url = $_POST['flag'];
+    $rating = (int)$_POST['rating'];
 
-  $sql = "INSERT INTO player (name, nationality, photo_url, club, pace, shooting, passing, dribbling, defending, physical, flag_url, rating) 
-      VALUES ('$name',
-       '$nationality',
-       '$photo_url', 
-       '$club',
-       '$pace',
-       '$shooting',
-       '$passing',
-       '$dribbling',
-       '$defending', 
-       '$physical',
-       '$flag_url',
-       '$rating')";
-  
-  if ($conn->query($sql) === TRUE) {
-      echo "gg";
-  } else {
-      echo "rr: " . $sql . "<br>" . $conn->error;
-  }
+    $stmt = $conn->prepare("INSERT INTO player (Name, NationalityID, ImagePlayer, ClubID, Position, Pace, Shooting, Passing, Dribbling, Defending, Physical, FlagURL, Rating) 
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sissiiiiiiisi", $name, $nationality, $photo_url, $club, $position, $pace, $shooting, $passing, $dribbling, $defending, $physical, $flag_url, $rating);
+    $stmt->execute();
+    
+    $stmt->error;
+    
+    $stmt->close();
 }
-
 ?>
+
+                       
+                      
+                           
+
+
+
+</table>
+
+</div> 
 
 
 
