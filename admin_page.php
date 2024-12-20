@@ -175,6 +175,8 @@ LEFT JOIN club ON player.ClubID = club.ClubID";
 
 $result = $conn->query($sql);
 
+
+
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo "<tr>
@@ -191,12 +193,13 @@ if ($result->num_rows > 0) {
                  <td><img src='{$row['FlagURL']}' alt='Flag' width='30px'></td>
                  <td>" . ($row['ClubName'] ?? 'N/A') . "</td>
                  <td>
-                     <a href='edit_player.php?id={$row['PlayerID']}' class='btn btn-warning'>Modifier</a>
-                     <a href='admin_page.php?delete_id={$row['PlayerID']}' class='btn btn-danger'>Supprimer</a>
+                     <a href='../modifer/edit_plyer.php?id={$row['PlayerID']}' class='btn btn-warning'>Modifier</a>
+                     <a href='../delete/delete_player.php?delete_id={$row['PlayerID']}' class='btn btn-danger'>Supprimer</a>
                  </td>
               </tr>";
     }
 }
+
 
  
 

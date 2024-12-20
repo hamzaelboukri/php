@@ -36,16 +36,7 @@
     </form>
 
     <?php
-    $servername = "localhost";
-    $username = "root"; 
-    $password = ""; 
-    $dbname = "fc_2025";  
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+  include 'conn.php';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ntc_name = $_POST['Nationalities'];
@@ -95,8 +86,8 @@ if ($result->num_rows > 0) {
                 <td>{$row['NationalityName']}</td>
                 <td><img src='{$row['NationalityImage']}' alt='Image' width='50px'></td>
                 <td>
-                    <button>Modifier</button>
-                    <button>Supprimer</button>
+                    <a href='../modifer/edit_ntc.php?id={$row['NationalityID']}' class='btn btn-warning'>Modifier</a>
+                    <a href='delete_ntc.php?id={$row['NationalityID']}' class='btn btn-danger'>Supprimer</a>
                 </td>
               </tr>";
     }
