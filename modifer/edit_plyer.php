@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sissiiiiiiisii", $name, $nationality, $photo_url, $club, $position, $pace, $shooting, $passing, $dribbling, $defending, $physical, $flag_url, $rating, $player_id);
 
     if ($stmt->execute()) {
-        echo "Player updated successfully!";
+        echo "Player updated successfully!";// et apres ?
     } else {
         echo "Error updating player: " . $stmt->error;
     }

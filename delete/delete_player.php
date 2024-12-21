@@ -2,7 +2,7 @@
 if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
     
-    include "../conn.php";
+    include "../conn.php";// include or include_once ?
 
     $sql = "DELETE FROM player WHERE PlayerID = ?";
     

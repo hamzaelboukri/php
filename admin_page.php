@@ -162,7 +162,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
+// vous avez déjà ce code sur la ficher add_player.php !
 
 $sql = "SELECT 
 player.*,
