@@ -7,7 +7,7 @@ $result = $conn->query($sql);
 if (!$result) {
     die("Query failed: " . $conn->error);
 }
-
+// vous allez faire l'affichage sans tableaux et aussi insertion dans add_player file ?
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo "<tr>

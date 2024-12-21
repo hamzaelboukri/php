@@ -77,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $club_image = $_POST['club_image'];
 
 
-    $stmt = $conn->prepare("INSERT INTO club (Clubname, ClubImage) VALUES (?, ?)");
+    $stmt = $conn->prepare("INSERT INTO club (Clubname, ClubImage) VALUES (?, ?)");//insertion des données sans validation ?
     $stmt->bind_param("ss", $club_name, $club_image);
  if ($stmt->execute ()) {
     echo 'ssss';
